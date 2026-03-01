@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArkaX — Find the Right Stream. Stay on Track to College.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate-800: #334155;
+    --slate-700: #324156;
+    --slate-600: #475569;
+    --slate-400: #94A3B8;
+    --slate-100: #F1F5F9;
+    --orange: #F6A623;
+    --orange-light: #F8B84B;
+    --red: #EF4444;
+    --green: #22C55E;
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--slate-800); overflow-x: hidden; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 60px;
+    background: rgba(30,41,59,0.97);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo img { height: 38px; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 32px; margin-left: 80px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.6); font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--orange); color: var(--slate-800); font-weight: 700;
+    padding: 10px 22px; border-radius: 6px; font-size: 0.88rem;
+    text-decoration: none; transition: background 0.2s; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--orange-light); }
+
+  /* ─── SCROLL TO TOP ─── */
+  .scroll-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 99;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--orange); color: var(--slate-800);
+    border: none; cursor: pointer; font-size: 1.1rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(246,166,35,0.4);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .scroll-top:hover { background: var(--orange-light); }
+
+  /* ─── SHARED ─── */
+  .container { max-width: 1040px; margin: 0 auto; }
+  section { padding: 100px 40px; }
+
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); font-weight: 600; margin-bottom: 16px;
+  }
+  .section-headline {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800;
+    line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 14px;
+  }
+  .section-intro {
+    font-size: 1rem; line-height: 1.75; margin-bottom: 56px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; background: var(--bg);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 120px 40px 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 45% at 50% 30%, rgba(246,166,35,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero .eyebrow {
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); font-weight: 600; margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.5s 0.1s ease forwards;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem); color: var(--slate-800);
+    line-height: 1.2; max-width: 720px; margin-bottom: 24px;
+    font-weight: 800; letter-spacing: -0.5px;
+    opacity: 0; animation: fadeUp 0.5s 0.2s ease forwards;
+  }
+  .hero h1 .accent { color: var(--orange); }
+  .hero .subhead {
+    font-size: 1.05rem; color: var(--slate-600); max-width: 520px;
+    line-height: 1.75; margin-bottom: 44px; font-weight: 400;
+    opacity: 0; animation: fadeUp 0.5s 0.35s ease forwards;
+  }
+  .hero .ctas {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.5s 0.5s ease forwards;
+  }
+  .btn-primary {
+    background: var(--orange); color: var(--white); font-weight: 700;
+    padding: 15px 32px; border-radius: 8px; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(246,166,35,0.25); }
+  .btn-secondary {
+    background: var(--white); color: var(--slate-600); font-weight: 500;
+    padding: 15px 24px; border-radius: 8px; font-size: 0.95rem;
+    text-decoration: none; border: 1px solid #E2E8F0; transition: all 0.2s; display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ─── PROBLEM ─── */
+  .problem { background: var(--bg); }
+  .problem .section-headline { color: var(--slate-800); max-width: 680px; }
+  .problem .section-intro { color: var(--slate-600); max-width: 560px; }
+
+  .pain-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+  .pain-card { background: var(--white); border-radius: 14px; padding: 32px; border: 1px solid #E2E8F0; position: relative; overflow: hidden; }
+  .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .pain-card.external::before { background: var(--red); }
+  .pain-card.internal::before { background: var(--orange); }
+  .pain-card.philosophical::before { background: var(--slate-700); }
+  .card-tag { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; display: block; }
+  .external .card-tag { color: var(--red); }
+  .internal .card-tag { color: var(--orange); }
+  .philosophical .card-tag { color: var(--slate-600); }
+  .pain-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--slate-800); line-height: 1.35; margin-bottom: 12px; }
+  .pain-card p { font-size: 0.92rem; color: var(--slate-600); line-height: 1.7; }
+
+  .conflict-block {
+    background: var(--slate-800); border-radius: 20px; padding: 56px;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: center;
+  }
+  .conflict-side { text-align: center; }
+  .conflict-who { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; display: block; }
+  .conflict-side.student .conflict-who { color: var(--orange); }
+  .conflict-side.parent .conflict-who { color: var(--slate-400); }
+  .conflict-quote { font-size: 1.1rem; color: var(--white); font-weight: 500; line-height: 1.5; font-style: italic; }
+  .conflict-divider { width: 1px; height: 80px; background: rgba(255,255,255,0.12); }
+  .conflict-resolve { grid-column: 1/-1; text-align: center; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .conflict-resolve p { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 540px; margin: 0 auto; }
+  .conflict-resolve .final-line { display: block; margin-top: 10px; color: var(--orange); font-weight: 600; font-size: 1rem; }
+
+  /* ─── GUIDE ─── */
+  .guide { background: var(--slate-800); }
+  .guide .section-headline { color: var(--white); max-width: 640px; }
+  .guide .section-intro { color: var(--slate-400); max-width: 540px; }
+
+  .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+  .testimonial-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 36px; }
+  .quote-mark { font-size: 3.5rem; line-height: 1; color: var(--orange); opacity: 0.5; font-family: Georgia, serif; margin-bottom: 8px; display: block; }
+  .quote-text { font-size: 0.98rem; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 28px; font-style: italic; }
+  .quote-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(246,166,35,0.15); border: 1px solid rgba(246,166,35,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; color: var(--orange); flex-shrink: 0; }
+  .author-name { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+  .author-detail { font-size: 0.78rem; color: var(--slate-400); margin-top: 2px; }
+
+  .guide-bridge { background: rgba(246,166,35,0.08); border: 1px solid rgba(246,166,35,0.2); border-radius: 12px; padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .guide-bridge p { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 560px; }
+  .guide-bridge p strong { color: var(--white); font-weight: 600; }
+  .bridge-arrow { color: var(--orange); font-size: 1.4rem; flex-shrink: 0; }
+
+  /* ─── COMPARISON ─── */
+  .comparison { background: var(--bg); }
+  .comparison .section-headline { color: var(--slate-800); max-width: 600px; }
+  .comparison .section-intro { color: var(--slate-600); max-width: 520px; }
+
+  .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid #E2E8F0; background: var(--white); }
+  table { width: 100%; border-collapse: collapse; min-width: 580px; }
+  thead tr { border-bottom: 1px solid #E2E8F0; }
+  th { padding: 20px 24px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; color: var(--slate-400); text-align: center; }
+  th:first-child { text-align: left; width: 40%; }
+  th.arkax-col { background: var(--slate-800); color: var(--orange); font-size: 0.85rem; }
+  td { padding: 16px 24px; border-bottom: 1px solid #F1F5F9; font-size: 0.92rem; color: var(--slate-700); text-align: center; vertical-align: middle; }
+  td:first-child { text-align: left; font-weight: 500; color: var(--slate-800); }
+  td.arkax-col { background: rgba(30,41,59,0.03); }
+  tbody tr:last-child td { border-bottom: none; }
+  .check { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: rgba(246,166,35,0.12); border-radius: 50%; color: var(--orange); font-size: 0.8rem; font-weight: 700; }
+  .cross { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; color: #CBD5E1; font-size: 1rem; }
+  .partial { font-size: 0.78rem; color: var(--slate-400); font-weight: 500; }
+
+  .comp-callout { margin-top: 32px; display: flex; align-items: center; gap: 14px; background: var(--slate-800); border-radius: 12px; padding: 24px 32px; }
+  .callout-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .comp-callout p { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .comp-callout p strong { color: var(--white); }
+  .comp-note { margin-top: 16px; font-size: 0.82rem; color: var(--slate-400); line-height: 1.6; }
+
+  /* ─── TWO PANEL ─── */
+  .two-panel { background: var(--slate-800); }
+  .two-panel .section-headline { color: var(--white); max-width: 640px; }
+  .two-panel .section-intro { color: var(--slate-400); max-width: 520px; }
+
+  .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+  .panel-card { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .panel-header { padding: 16px 20px; display: flex; align-items: center; gap: 10px; }
+  .student-panel .panel-header { background: rgba(246,166,35,0.12); }
+  .parent-panel .panel-header { background: rgba(148,163,184,0.1); }
+  .panel-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .student-panel .panel-dot { background: var(--orange); }
+  .parent-panel .panel-dot { background: var(--slate-400); }
+  .panel-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .student-panel .panel-label { color: var(--orange); }
+  .parent-panel .panel-label { color: var(--slate-400); }
+  .panel-body { padding: 24px; background: rgba(255,255,255,0.03); }
+  .mock-name { color: var(--white); font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+  .mock-sub { color: rgba(255,255,255,0.35); font-size: 0.78rem; margin-bottom: 20px; }
+  .mock-stage { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+  .stage-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .stage-dot.done { background: var(--orange); }
+  .stage-dot.current { background: var(--white); }
+  .stage-dot.upcoming { background: rgba(255,255,255,0.15); }
+  .stage-text { flex: 1; font-size: 0.84rem; line-height: 1.4; }
+  .stage-text.done { color: rgba(255,255,255,0.5); }
+  .stage-text.current { color: var(--white); font-weight: 600; }
+  .stage-text.upcoming { color: rgba(255,255,255,0.25); }
+  .stage-badge { font-size: 0.65rem; padding: 3px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; }
+  .stage-badge.done { background: rgba(246,166,35,0.15); color: var(--orange); }
+  .stage-badge.current { background: rgba(255,255,255,0.1); color: var(--white); }
+  .insight-box { border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .insight-box.orange { background: rgba(246,166,35,0.08); border: 1px solid rgba(246,166,35,0.2); }
+  .insight-box.slate { background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.15); }
+  .insight-label { font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .orange .insight-label { color: var(--orange); }
+  .slate .insight-label { color: var(--slate-400); }
+  .insight-text { font-size: 0.84rem; color: rgba(255,255,255,0.75); line-height: 1.55; }
+  .panel-bridge { text-align: center; padding-top: 8px; }
+  .panel-bridge p { font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+  .panel-bridge strong { color: var(--white); }
+
+  /* ─── FAMILY PRIORITY ─── */
+  .family-priority { background: var(--bg); }
+  .fp-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .fp-copy .section-headline { color: var(--slate-800); }
+  .fp-copy .section-body { font-size: 0.98rem; color: var(--slate-600); line-height: 1.75; margin-bottom: 28px; }
+  .unique-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(246,166,35,0.1); border: 1px solid rgba(246,166,35,0.25); border-radius: 6px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; color: var(--orange); }
+  .unique-tag::before { content: '★'; font-size: 0.75rem; }
+  .priority-card { background: var(--white); border-radius: 20px; padding: 32px; border: 1px solid #E2E8F0; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .card-title { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); font-weight: 600; margin-bottom: 24px; }
+  .priority-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #F1F5F9; }
+  .priority-item:last-of-type { border-bottom: none; }
+  .priority-rank { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+  .rank-high { background: rgba(246,166,35,0.15); color: var(--orange); }
+  .rank-med { background: rgba(30,41,59,0.08); color: var(--slate-600); }
+  .rank-low { background: #F1F5F9; color: var(--slate-400); }
+  .priority-name { flex: 1; font-size: 0.88rem; font-weight: 500; color: var(--slate-800); }
+  .bar-wrap { width: 80px; height: 5px; background: #F1F5F9; border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: var(--orange); }
+  .bar-fill.med { background: var(--slate-400); }
+  .match-result { margin-top: 20px; background: rgba(246,166,35,0.07); border: 1px solid rgba(246,166,35,0.2); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; }
+  .match-score { font-size: 1.8rem; font-weight: 800; color: var(--orange); line-height: 1; flex-shrink: 0; }
+  .match-text { font-size: 0.85rem; color: var(--slate-600); line-height: 1.55; }
+  .match-text strong { color: var(--slate-800); font-weight: 600; }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-it-works { background: var(--slate-800); }
+  .how-it-works .centered { text-align: center; margin-bottom: 72px; }
+  .how-it-works .section-headline { color: var(--white); }
+  .how-it-works .section-intro { color: var(--slate-400); max-width: 480px; margin: 0 auto 0; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 62px; left: 80px; right: 80px; height: 1px; background: repeating-linear-gradient(90deg, rgba(246,166,35,0.4) 0, rgba(246,166,35,0.4) 5px, transparent 5px, transparent 12px); }
+  .step { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 36px 28px; }
+  .step-num { width: 52px; height: 52px; border-radius: 50%; background: rgba(246,166,35,0.12); border: 2px solid rgba(246,166,35,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: var(--orange); margin-bottom: 24px; position: relative; z-index: 1; }
+  .step h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.35; }
+  .step p { font-size: 0.88rem; color: var(--slate-400); line-height: 1.7; }
+  .steps-note { text-align: center; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); font-size: 0.92rem; color: var(--slate-400); line-height: 1.6; }
+  .steps-note strong { color: var(--white); }
+
+  /* ─── STAKES ─── */
+  .stakes { background: var(--bg); }
+  .stakes .centered { text-align: center; margin-bottom: 56px; }
+  .stakes .section-headline { color: var(--slate-800); }
+  .stakes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stakes-card { border-radius: 20px; padding: 44px 40px; background: var(--slate-800); position: relative; overflow: hidden; }
+  .stakes-card.failure { border: 1px solid rgba(239,68,68,0.25); }
+  .stakes-card.success { border: 1px solid rgba(34,197,94,0.25); }
+  .stakes-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .failure::before { background: var(--red); }
+  .success::before { background: var(--green); }
+  .stakes-label { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .failure .stakes-label { color: var(--red); }
+  .success .stakes-label { color: var(--green); }
+  .stakes-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .failure .stakes-label::before { background: var(--red); }
+  .success .stakes-label::before { background: var(--green); }
+  .stakes-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .stakes-list { list-style: none; }
+  .stakes-list li { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.55; }
+  .stakes-list li:last-child { border-bottom: none; }
+  .list-icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 1px; }
+  .failure .list-icon { background: rgba(239,68,68,0.15); color: var(--red); }
+  .success .list-icon { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  /* ─── PRICING ─── */
+  .pricing { background: var(--slate-800); }
+  .pricing .centered { text-align: center; margin-bottom: 56px; }
+  .pricing .section-headline { color: var(--white); }
+  .pricing .section-intro { color: var(--slate-400); margin: 0; }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 780px; margin: 0 auto; align-items: start; }
+  .price-card { border-radius: 20px; padding: 40px; }
+  .price-card.free { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+  .price-card.paid { background: var(--white); }
+  .price-badge { display: inline-block; background: var(--orange); color: var(--slate-800); font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 24px; }
+  .price-tier { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+  .free .price-tier { color: var(--slate-400); }
+  .paid .price-tier { color: var(--orange); }
+  .price-amount { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 6px; letter-spacing: -1px; }
+  .free .price-amount { color: var(--white); }
+  .paid .price-amount { color: var(--slate-800); }
+  .price-period { font-size: 0.85rem; margin-bottom: 32px; }
+  .free .price-period { color: var(--slate-400); }
+  .paid .price-period { color: var(--slate-600); }
+  .price-divider { height: 1px; margin-bottom: 28px; }
+  .free .price-divider { background: rgba(255,255,255,0.07); }
+  .paid .price-divider { background: #E2E8F0; }
+  .price-features { list-style: none; margin-bottom: 36px; }
+  .price-features li { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; font-size: 0.9rem; line-height: 1.5; }
+  .free .price-features li { color: rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .paid .price-features li { color: var(--slate-700); border-bottom: 1px solid #F1F5F9; }
+  .price-features li:last-child { border-bottom: none; }
+  .feat-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .free .feat-icon { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .paid .feat-icon { background: rgba(246,166,35,0.15); color: var(--orange); }
+  .price-cta { display: block; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; }
+  .free .price-cta { background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid rgba(255,255,255,0.1); }
+  .free .price-cta:hover { background: rgba(255,255,255,0.12); }
+  .paid .price-cta { background: var(--orange); color: var(--slate-800); }
+  .paid .price-cta:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(246,166,35,0.3); }
+  .free-note { text-align: center; margin-top: 28px; font-size: 0.82rem; color: var(--slate-400); line-height: 1.6; }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta { background: var(--bg); text-align: center; padding: 120px 40px; }
+  .final-cta .inner { max-width: 680px; margin: 0 auto; }
+  .final-cta h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; color: var(--slate-800); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
+  .final-cta h2 em { color: var(--orange); font-style: normal; }
+  .final-cta .subhead { font-size: 1.05rem; color: var(--slate-600); line-height: 1.75; margin-bottom: 48px; }
+  .final-cta .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .final-cta .btn-primary { font-size: 1rem; padding: 16px 36px; }
+  .final-cta .btn-secondary { font-size: 1rem; padding: 16px 28px; }
+  .reassurance { font-size: 0.82rem; color: var(--slate-400); line-height: 1.6; }
+  .reassurance span { display: inline-flex; align-items: center; gap: 6px; margin: 0 10px; }
+  .reassurance span::before { content: '✓'; color: var(--orange); font-weight: 700; font-size: 0.75rem; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--slate-800); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-size: 1.2rem; font-weight: 800; color: rgba(255,255,255,0.5); letter-spacing: -0.3px; }
+  .footer-logo span { color: var(--orange); }
+  footer p { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    .pain-cards, .panel-grid, .fp-inner, .steps, .stakes-grid, .pricing-grid, .testimonials { grid-template-columns: 1fr; }
+    .conflict-block { grid-template-columns: 1fr; padding: 36px 24px; gap: 24px; }
+    .conflict-divider { display: none; }
+    .steps::before { display: none; }
+    .guide-bridge { flex-direction: column; }
+    .stakes-card { padding: 36px 28px; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    .scroll-top { bottom: 20px; right: 20px; }
+  }
+
+/* ─── MOBILE NAV ─── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 100px 24px 60px; }
+
+  .hamburger { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 24px;
+    background: rgba(30,41,59,0.98);
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .nav-links.active { display: flex; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="ArkaX Logo-transparent.png" alt="ArkaX Logo" alt="ArkaX"></a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it Works</a>
+    <a href="#get-started">Pricing</a>
+    <a href="#parents">Parents</a>
+    <a href="schools.html">Schools</a>
+    <a href="counselors.html">Counselors</a>
+    <a href="#">FAQs</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="#" style="color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='#F6A623';this.style.color='#F6A623'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.6)'">Login</a>
+    <a href="#get-started" class="nav-cta">Start Free →</a>
+  </div>
+</nav>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">For students in Classes 9–12 and their parents</div>
+  <h1>Find the stream that's right for you.<br><span class="accent">Stay on track all the way to college.</span></h1>
+  <p class="subhead">ArkaX doesn't give you a plan and leave. We check in at every stage, see how you're doing, and adjust the path if something isn't working.</p>
+  <div class="ctas">
+    <a href="#get-started" class="btn-primary">Start Free →</a>
+    <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label reveal">The Problem</div>
+    <h2 class="section-headline reveal">Stream selection is one of the biggest decisions of your life. Most families make it without data, without a plan, and without agreeing.</h2>
+    <p class="section-intro reveal">You're not failing at this. The support to make this decision well — that's always been missing.</p>
+    <div class="pain-cards">
+      <div class="pain-card external reveal">
+        <span class="card-tag">The Visible Problem</span>
+        <h3>No one gives you data. Everyone gives you opinions.</h3>
+        <p>Relatives, teachers, friends — everyone has a view on which stream to pick. But no one shows you a strengths analysis or a match score. Just pressure dressed up as advice.</p>
+      </div>
+      <div class="pain-card internal reveal">
+        <span class="card-tag">How It Feels</span>
+        <h3>What if we get this wrong?</h3>
+        <p>Two years in the wrong stream. Lakhs spent on coaching that doesn't fit. A child who's disengaged because the path was never really theirs. That fear is real.</p>
+      </div>
+      <div class="pain-card philosophical reveal">
+        <span class="card-tag">Why It's Hard</span>
+        <h3>At 15, most students don't yet know who they are. And yet the decision can't wait.</h3>
+        <p>The choice comes before the clarity. ArkaX is built to close that gap — with data, not guesswork.</p>
+      </div>
+    </div>
+    <div class="conflict-block reveal">
+      <div class="conflict-side student">
+        <span class="conflict-who">Student wants</span>
+        <div class="conflict-quote">"A career that feels like me — not what everyone else is doing."</div>
+      </div>
+      <div class="conflict-divider"></div>
+      <div class="conflict-side parent">
+        <span class="conflict-who">Parent wants</span>
+        <div class="conflict-quote">"Security. A good college. A future they won't regret."</div>
+      </div>
+      <div class="conflict-resolve">
+        <p>Both are right. Both are scared. And without data, the loudest voice wins — not the clearest path.</p>
+        <strong class="final-line">ArkaX is where both voices finally agree.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section class="guide">
+  <div class="container">
+    <div class="section-label reveal">Why ArkaX</div>
+    <h2 class="section-headline reveal">We've been in that room with families. We know what this moment feels like.</h2>
+    <p class="section-intro reveal">The anxiety is real. The disagreements are real. The lack of data is real. ArkaX was built for exactly this — to give every family the clarity they deserve, starting with understanding your child.</p>
+    <div class="testimonials">
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">I had attempted those assessments. I felt so good and acknowledged that how can I reach my goals in future. The experience was nice.</p>
+        <div class="quote-author">
+          <div class="author-avatar">H</div>
+          <div>
+            <div class="author-name">Harshit</div>
+            <div class="author-detail">Class 9 · Panineeya Mahavidyalaya Public School</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">It helped me to understand my interests, abilities, and career preference. These assessments encouraged me to plan better for my future career.</p>
+        <div class="quote-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Akshya</div>
+            <div class="author-detail">Class 9 · Panineeya Mahavidyalaya Public School</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="guide-bridge reveal">
+      <p>The assessment is just the beginning. <strong>ArkaX stays with your child from that first moment of clarity all the way to college admission.</strong></p>
+      <div class="bridge-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison">
+  <div class="container">
+    <div class="section-label reveal">How ArkaX is Different</div>
+    <h2 class="section-headline reveal">Every other option solves one part of the problem. ArkaX solves all of it.</h2>
+    <p class="section-intro reveal">Most families try an assessment, a counsellor, or their school — and find that each one stops too soon. Here's why.</p>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>One-time Report<br><span style="font-size:0.7rem;color:#CBD5E1;font-weight:400;letter-spacing:0;text-transform:none;">(Online career assessments)</span></th>
+            <th>Human Counsellor</th>
+            <th class="arkax-col">ArkaX<br><span style="font-size:0.7rem;color:rgba(246,166,35,0.7);font-weight:400;letter-spacing:0;text-transform:none;">Integrated solution</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stream recommendation with data</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">Partial</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Uses actual academic performance</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="partial">Partial</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Family priority matching</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Separate parent dashboard</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Living roadmap — adapts over time</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="partial">Partial</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Real-time progress tracking</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Stays with student till college</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Scales to every student instantly</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td class="arkax-col"><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="comp-callout reveal">
+      <div class="callout-dot"></div>
+      <p>Most options give your child a report and wish them luck. <strong>ArkaX gives them a plan — and stays to make sure it works.</strong></p>
+    </div>
+    <p class="comp-note reveal">ArkaX partners directly with schools — giving counsellors a system they can use at scale, without adding to their workload.</p>
+  </div>
+</section>
+
+<!-- TWO PANEL -->
+<section class="two-panel" id="parents">
+  <div class="container">
+    <div class="section-label reveal">The Proof, Not the Promise</div>
+    <h2 class="section-headline reveal">Same plan. Student's vision. Parent's confidence.</h2>
+    <p class="section-intro reveal">ArkaX gives the student their own journey — and gives parents complete visibility — without overriding the student's voice.</p>
+    <div class="panel-grid">
+      <div class="panel-card student-panel reveal">
+        <div class="panel-header">
+          <div class="panel-dot"></div>
+          <div class="panel-label">Student View — Arjun, Class 10</div>
+        </div>
+        <div class="panel-body">
+          <div class="mock-name">Your Journey</div>
+          <div class="mock-sub">Science Stream · Competitive Tier</div>
+          <div class="mock-stage"><div class="stage-dot done"></div><div class="stage-text done">Discovery — Assessments complete</div><div class="stage-badge done">Done</div></div>
+          <div class="mock-stage"><div class="stage-dot done"></div><div class="stage-text done">Decision — Stream selected</div><div class="stage-badge done">Done</div></div>
+          <div class="mock-stage"><div class="stage-dot current"></div><div class="stage-text current">Intensity — Tier & target setting</div><div class="stage-badge current">In Progress</div></div>
+          <div class="mock-stage"><div class="stage-dot upcoming"></div><div class="stage-text upcoming">Roadmap — College predictor</div></div>
+          <div class="mock-stage"><div class="stage-dot upcoming"></div><div class="stage-text upcoming">Tasks — Milestone tracking</div></div>
+          <div class="insight-box orange"><div class="insight-label">Your Next Milestone</div><div class="insight-text">Lock your target tier by Nov 30th. Your counsellor session is scheduled.</div></div>
+        </div>
+      </div>
+      <div class="panel-card parent-panel reveal">
+        <div class="panel-header">
+          <div class="panel-dot"></div>
+          <div class="panel-label">Parent View — Arjun's Parent</div>
+        </div>
+        <div class="panel-body">
+          <div class="mock-name">Arjun's Progress</div>
+          <div class="mock-sub">Last updated 2 hours ago</div>
+          <div class="mock-stage"><div class="stage-dot done"></div><div class="stage-text done">Assessments complete — results reviewed</div><div class="stage-badge done">✓</div></div>
+          <div class="mock-stage"><div class="stage-dot done"></div><div class="stage-text done">Science stream confirmed — data-backed</div><div class="stage-badge done">✓</div></div>
+          <div class="mock-stage"><div class="stage-dot current"></div><div class="stage-text current">Finalising tier — JEE Advanced track</div><div class="stage-badge current">Active</div></div>
+          <div class="mock-stage"><div class="stage-dot upcoming"></div><div class="stage-text upcoming">Target colleges — 47 matched so far</div></div>
+          <div class="mock-stage"><div class="stage-dot upcoming"></div><div class="stage-text upcoming">Milestone plan — awaiting tier lock</div></div>
+          <div class="insight-box slate"><div class="insight-label">Family Alignment Score</div><div class="insight-text">Your priorities are 91% aligned with Arjun's selected path. No red flags.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-bridge reveal">
+      <p><strong>Arjun feels heard. This parent feels confident.</strong><br>That's not a coincidence — it's what ArkaX is designed to do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAMILY PRIORITY -->
+<section class="family-priority">
+  <div class="container">
+    <div class="fp-inner">
+      <div class="fp-copy">
+        <div class="section-label reveal">Family Priority Matching</div>
+        <h2 class="section-headline reveal">The feature no other platform has built.</h2>
+        <p class="section-body reveal">Every family has their own mix of priorities — job security, college brand, salary potential, how far from home. ArkaX captures yours and runs it against every recommendation. So the path forward isn't just right for your student — it's right for your family.</p>
+        <div class="unique-tag reveal">Only available on ArkaX</div>
+      </div>
+      <div class="priority-card reveal">
+        <div class="card-title">Your Family's Priority Profile</div>
+        <div class="priority-item"><div class="priority-rank rank-high">1</div><div class="priority-name">Job security & stability</div><div class="bar-wrap"><div class="bar-fill" style="width:92%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-high">2</div><div class="priority-name">College reputation</div><div class="bar-wrap"><div class="bar-fill" style="width:80%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-high">3</div><div class="priority-name">Student's personal interest</div><div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-med">4</div><div class="priority-name">Salary potential</div><div class="bar-wrap"><div class="bar-fill med" style="width:55%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-low">5</div><div class="priority-name">Stay in home city</div><div class="bar-wrap"><div class="bar-fill med" style="width:28%"></div></div></div>
+        <div class="match-result"><div class="match-score">91%</div><div class="match-text"><strong>Science → JEE path</strong> satisfies your top 3 priorities. Your family is aligned with your student's chosen direction.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="centered">
+      <div class="section-label reveal">How It Works</div>
+      <h2 class="section-headline reveal">Three steps to career clarity.</h2>
+      <p class="section-intro reveal">No complicated setup. No long calls before you can start. You can begin in minutes — at any point in grades 9–12.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Understand your strengths and interests</h3>
+        <p>A short assessment covering your strengths, interests, and what matters to your family. Takes about 30 minutes. No right or wrong answers.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Get a recommendation built for you</h3>
+        <p>Receive a personalised stream recommendation matched across 186+ career paths — aligned with your strengths and your family's priorities. All streams are compliant with NEP 2020.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Follow your roadmap all the way to college</h3>
+        <p>A milestone-based plan that checks in, adjusts when needed, and stays with you — from your first assessment to college admission.</p>
+      </div>
+    </div>
+    <div class="steps-note reveal">Most students see their stream recommendation <strong>within the same day.</strong><br>The roadmap begins the moment you do.</div>
+  </div>
+</section>
+
+<!-- STAKES -->
+<section class="stakes">
+  <div class="container">
+    <div class="centered">
+      <div class="section-label reveal">The Decision You're Making</div>
+      <h2 class="section-headline reveal">Two futures are possible.<br>The path splits here.</h2>
+    </div>
+    <div class="stakes-grid">
+      <div class="stakes-card failure reveal">
+        <div class="stakes-label">Without ArkaX</div>
+        <h3>Another year of "we'll figure it out later."</h3>
+        <ul class="stakes-list">
+          <li><div class="list-icon">—</div>Stream chosen based on peer pressure or parent push — not fit</li>
+          <li><div class="list-icon">—</div>Class 11 begins before the regret sets in</li>
+          <li><div class="list-icon">—</div>Lakhs spent on coaching for the wrong exam</li>
+          <li><div class="list-icon">—</div>College entrance scramble with no strategy</li>
+          <li><div class="list-icon">—</div>Student feels unheard. Parent feels helpless.</li>
+        </ul>
+      </div>
+      <div class="stakes-card success reveal">
+        <div class="stakes-label">With ArkaX</div>
+        <h3>Your student walks into their future knowing exactly why.</h3>
+        <ul class="stakes-list">
+          <li><div class="list-icon">✓</div>Stream chosen with data, alignment, and confidence</li>
+          <li><div class="list-icon">✓</div>Student and parent on the same page — no conflict</li>
+          <li><div class="list-icon">✓</div>Structured roadmap from Day 1, not Day 365</li>
+          <li><div class="list-icon">✓</div>College shortlist built early, pursued strategically</li>
+          <li><div class="list-icon">✓</div>Your child owns their future. You helped them get there.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="get-started">
+  <div class="container">
+    <div class="centered">
+      <div class="section-label reveal">Pricing</div>
+      <h2 class="section-headline reveal">Start free. Go further when you're ready.</h2>
+      <p class="section-intro reveal">Try ArkaX at no cost. Upgrade when you're ready for the full journey.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card free reveal">
+        <div class="price-tier">Free</div>
+        <div class="price-amount">₹0</div>
+        <div class="price-period">Always free</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><div class="feat-icon">✓</div>One assessment to get started</li>
+          <li><div class="feat-icon">✓</div>A glimpse of matching careers</li>
+        </ul>
+        <a href="#" class="price-cta">Start Free →</a>
+      </div>
+      <div class="price-card paid reveal">
+        <div class="price-badge">Full Journey</div>
+        <div class="price-tier">Complete</div>
+        <div class="price-amount">₹5,999</div>
+        <div class="price-period">Per year · one student</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><div class="feat-icon">✓</div>4 comprehensive assessments</li>
+          <li><div class="feat-icon">✓</div>Personalised stream recommendation</li>
+          <li><div class="feat-icon">✓</div>Family priority matching</li>
+          <li><div class="feat-icon">✓</div>College reach guidance (Safe · Match · Reach)</li>
+          <li><div class="feat-icon">✓</div>Personalised roadmap — adapts as you grow</li>
+          <li><div class="feat-icon">✓</div>Parent dashboard access</li>
+          <li><div class="feat-icon">✓</div>Available 24/7, access anytime, anywhere</li>
+        </ul>
+        <a href="#" class="price-cta">Get the Full Journey →</a>
+      </div>
+    </div>
+    <p class="free-note reveal">Not sure yet? Start free — no credit card needed. Upgrade any time.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="inner">
+    <div class="section-label">Get Started</div>
+    <h2>Your student's future is being decided right now — <em>with or without data.</em></h2>
+    <p class="subhead">Give them the clarity they deserve. Give yourself the confidence you've been looking for.</p>
+    <div class="ctas">
+      <a href="#get-started" class="btn-primary">Get the Full Journey →</a>
+      <a href="#get-started" class="btn-secondary">Start Free First</a>
+    </div>
+    <div class="reassurance">
+      <span>No credit card for free plan</span>
+      <span>Cancel any time</span>
+      <span>Results same day</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="ArkaX Logo-transparent.png" alt="ArkaX Logo" alt="ArkaX" style="height:28px;opacity:0.7;"></div>
+  <p>Career guidance built for Indian families.</p>
+  <p>© 2025 ArkaX. All rights reserved.</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Scroll to top button
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) scrollBtn.classList.add('visible');
+    else scrollBtn.classList.remove('visible');
+  });
+</script>
+
+<script>
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks) navLinks.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
