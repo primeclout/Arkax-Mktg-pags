@@ -181,15 +181,45 @@
   .comparison .section-headline { color: var(--slate-800); max-width: 600px; }
   .comparison .section-intro { color: var(--slate-600); max-width: 520px; }
 
-  .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid #E2E8F0; background: var(--white); }
+  .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid #E2E8F0; background: var(--white); box-shadow: 0 4px 24px rgba(51,65,85,0.07); }
   table { width: 100%; border-collapse: collapse; min-width: 580px; }
   thead tr { border-bottom: 1px solid #E2E8F0; }
   th { padding: 20px 24px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; color: var(--slate-400); text-align: center; }
   th:first-child { text-align: left; width: 40%; }
-  th.arkax-col { background: var(--slate-800); color: var(--orange); font-size: 0.85rem; }
+  th.arkax-col {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    color: var(--orange);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    border-left: 1.5px solid rgba(246,166,35,0.25);
+    border-right: 1.5px solid rgba(246,166,35,0.25);
+  }
+  th.arkax-col::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  }
   td { padding: 16px 24px; border-bottom: 1px solid #F1F5F9; font-size: 0.92rem; color: var(--slate-700); text-align: center; vertical-align: middle; }
   td:first-child { text-align: left; font-weight: 500; color: var(--slate-800); }
-  td.arkax-col { background: rgba(30,41,59,0.03); }
+  td.arkax-col {
+    background: linear-gradient(180deg, rgba(246,166,35,0.04) 0%, rgba(246,166,35,0.02) 100%);
+    border-left: 1.5px solid rgba(246,166,35,0.12);
+    border-right: 1.5px solid rgba(246,166,35,0.12);
+  }
+  td.arkax-col .check {
+    background: rgba(246,166,35,0.18);
+    color: var(--orange);
+    width: 28px; height: 28px;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(246,166,35,0.18);
+  }
+  tbody tr:last-child td.arkax-col {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1.5px solid rgba(246,166,35,0.2);
+  }
   tbody tr:last-child td { border-bottom: none; }
   .check { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: rgba(246,166,35,0.12); border-radius: 50%; color: var(--orange); font-size: 0.8rem; font-weight: 700; }
   .cross { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; color: #CBD5E1; font-size: 1rem; }
@@ -471,9 +501,539 @@
 .hero-show .subhead { animation: heroFadeUp 0.55s 1.00s ease forwards; }
 .hero-show .ctas    { animation: heroFadeUp 0.55s 1.20s ease forwards; }
 
+
+
+  /* ═══ DARK HERO ═══ */
+  .hero {
+    min-height: 100vh;
+    background: #0f172a;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 120px 40px 100px;
+    position: relative; overflow: hidden;
+  }
+  #hero-canvas {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+  }
+  /* Warm orange bloom */
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 40%, rgba(246,166,35,0.10) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 30% at 30% 80%, rgba(246,166,35,0.04) 0%, transparent 60%);
+    pointer-events: none; z-index: 1;
+  }
+  .hero > * { position: relative; z-index: 2; }
+  #hero-subjects { z-index: 3 !important; }
+
+  /* Override hero text for dark bg */
+  .hero h2 .l1 { color: #f8fafc !important; }
+  .hero h2 .l2 { color: rgba(248,250,252,0.45) !important; }
+  .hero h2 .l3 { color: var(--orange) !important; }
+  .hero .subhead { color: rgba(248,250,252,0.5) !important; }
+  .hero .eyebrow { color: var(--orange) !important; }
+
+  /* Override subjects for dark bg */
+  .hs-word { color: rgba(248,250,252,0.9) !important; }
+  .hs-sep  { color: rgba(248,250,252,0.25) !important; }
+
+  /* btn-secondary on dark */
+  .hero .btn-secondary {
+    background: rgba(255,255,255,0.06) !important;
+    color: rgba(255,255,255,0.7) !important;
+    border-color: rgba(255,255,255,0.15) !important;
+  }
+  .hero .btn-secondary:hover {
+    background: rgba(255,255,255,0.1) !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,0.3) !important;
+  }
+
+  /* ═══ WAVE DIVIDERS ═══ */
+  .wave-divider { display: block; width: 100%; line-height: 0; }
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ═══ SCROLL PROGRESS ═══ */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; z-index: 9999;
+    height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+    pointer-events: none;
+    transition: width 0.1s linear;
+  }
+
+  /* ═══ ELEVATED PAIN CARDS ═══ */
+  .pain-cards { gap: 28px; }
+  .pain-card {
+    border: none !important;
+    box-shadow: 0 1px 3px rgba(51,65,85,0.06), 0 8px 32px rgba(51,65,85,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .pain-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 2px 6px rgba(51,65,85,0.08), 0 20px 48px rgba(51,65,85,0.14);
+  }
+  .pain-card h3 { font-size: 1.1rem; }
+
+  /* ═══ CONFLICT BLOCK — BEAUTIFUL ═══ */
+  .conflict-block {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    border: 1px solid rgba(246,166,35,0.12) !important;
+    box-shadow: 0 24px 64px rgba(15,23,42,0.2);
+    position: relative; overflow: hidden;
+  }
+  .conflict-block::before {
+    content: ''; position: absolute;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(246,166,35,0.08) 0%, transparent 70%);
+    top: -80px; right: -80px; pointer-events: none;
+  }
+
+  /* ═══ SECTION BACKGROUNDS ═══ */
+  .problem  { background: #fff; }
+  .guide    { background: #0f172a; }
+  .guide .section-headline { color: #f8fafc; }
+  .guide .section-intro    { color: rgba(248,250,252,0.5); }
+  .guide-bridge { background: rgba(246,166,35,0.08) !important; }
+
+  /* ═══ TESTIMONIAL CARDS ═══ */
+  .testimonial-card {
+    border: none !important;
+    background: rgba(255,255,255,0.04) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    border-radius: 20px !important;
+  }
+
+  /* ═══ COMPARISON ═══ */
+  .comparison { background: #f8fafc; }
+
+  /* ═══ HOW IT WORKS — STEP VISUAL ═══ */
+  .step {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+    border-radius: 20px !important;
+    padding: 40px 28px !important;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .step:hover { border-color: rgba(246,166,35,0.25) !important; }
+  .step::after {
+    content: attr(data-step);
+    position: absolute; bottom: -14px; right: 8px;
+    font-size: 7.5rem; font-weight: 900; line-height: 1;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none; user-select: none;
+    letter-spacing: -4px;
+  }
+
+  /* ═══ STAKES CARDS ═══ */
+  .stakes-card {
+    background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%) !important;
+    box-shadow: 0 16px 48px rgba(15,23,42,0.2);
+  }
+
+  /* ═══ FINAL CTA — DARK ELEGANT ═══ */
+  .final-cta {
+    background: #0f172a !important;
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 65% 60% at 50% 80%, rgba(246,166,35,0.13) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .final-cta .inner { position: relative; z-index: 1; }
+  .final-cta h2    { color: #f8fafc !important; }
+  .final-cta h2 em { color: var(--orange) !important; font-style: normal; }
+  .final-cta .subhead { color: rgba(248,250,252,0.45) !important; }
+  .final-cta .reassurance { color: rgba(255,255,255,0.25) !important; }
+  .final-cta .btn-secondary {
+    background: rgba(255,255,255,0.05) !important;
+    color: rgba(255,255,255,0.6) !important;
+    border-color: rgba(255,255,255,0.12) !important;
+  }
+  .final-cta .btn-secondary:hover {
+    background: rgba(255,255,255,0.1) !important;
+    color: #fff !important;
+  }
+
+  /* ═══ PRICING tweaks on dark ═══ */
+  .pricing { background: #1e293b; }
+
+  /* ═══ ANIMATED BARS ═══ */
+  .bar-fill { width: 0 !important; transition: width 1.3s cubic-bezier(0.4,0,0.2,1); }
+  .bars-run .bar-fill { width: var(--w) !important; }
+
+  /* ═══ COUNTER ═══ */
+  .counter { display: inline-block; }
+
+
+  /* ══════════════════════════════════════
+     SECTION BACKGROUND DESIGNS
+     ══════════════════════════════════════ */
+
+  /* ── PROBLEM (white) — large concentric arc rings top-right ── */
+  .problem { position: relative; overflow: hidden; }
+  .problem::before {
+    content: ''; position: absolute;
+    width: 700px; height: 700px;
+    top: -200px; right: -200px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(246,166,35,0.055) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+  .problem::after {
+    content: ''; position: absolute;
+    width: 700px; height: 700px;
+    top: -200px; right: -200px;
+    border-radius: 50%;
+    border: 1px solid rgba(246,166,35,0.07);
+    box-shadow:
+      0 0 0 60px rgba(246,166,35,0.025),
+      0 0 0 120px rgba(246,166,35,0.018),
+      0 0 0 200px rgba(246,166,35,0.01);
+    pointer-events: none; z-index: 0;
+  }
+  .problem .container { position: relative; z-index: 1; }
+
+  /* ── GUIDE (dark) — aurora bands across the section ── */
+  .guide { position: relative; overflow: hidden; }
+  .guide::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 40% at 20% 60%, rgba(246,166,35,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 20%, rgba(148,163,184,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 100%, rgba(246,166,35,0.04) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+  .guide .container { position: relative; z-index: 1; }
+
+  /* ── COMPARISON (light) — diagonal hairlines ── */
+  .comparison { position: relative; overflow: hidden; }
+  .comparison::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(51,65,85,0.025) 0px,
+      rgba(51,65,85,0.025) 1px,
+      transparent 1px,
+      transparent 56px
+    );
+    pointer-events: none; z-index: 0;
+  }
+  .comparison .container { position: relative; z-index: 1; }
+
+  /* ── TWO PANEL (dark) — glowing mesh gradient ── */
+  .two-panel { position: relative; overflow: hidden; }
+  .two-panel::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 90% 50% at 10% 50%, rgba(246,166,35,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 70% at 90% 20%, rgba(51,65,85,0.8) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 60% 90%, rgba(246,166,35,0.04) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+  .two-panel::after {
+    content: ''; position: absolute;
+    width: 1px; height: 60%;
+    top: 20%; left: 50%;
+    background: linear-gradient(to bottom, transparent, rgba(246,166,35,0.12), transparent);
+    pointer-events: none; z-index: 0;
+  }
+  .two-panel .container { position: relative; z-index: 1; }
+
+  /* ── FAMILY PRIORITY (white) — radial sunburst lines from bottom-left ── */
+  .family-priority { position: relative; overflow: hidden; }
+  .family-priority::before {
+    content: ''; position: absolute;
+    width: 900px; height: 900px;
+    bottom: -400px; left: -300px;
+    background: conic-gradient(
+      from 330deg at 30% 80%,
+      rgba(246,166,35,0.0) 0deg,
+      rgba(246,166,35,0.03) 2deg,
+      rgba(246,166,35,0.0) 4deg,
+      rgba(246,166,35,0.0) 14deg,
+      rgba(246,166,35,0.025) 16deg,
+      rgba(246,166,35,0.0) 18deg,
+      rgba(246,166,35,0.0) 28deg,
+      rgba(246,166,35,0.02) 30deg,
+      rgba(246,166,35,0.0) 32deg,
+      rgba(246,166,35,0.0) 42deg,
+      rgba(246,166,35,0.018) 44deg,
+      rgba(246,166,35,0.0) 46deg,
+      rgba(246,166,35,0.0) 360deg
+    );
+    pointer-events: none; z-index: 0;
+  }
+  .family-priority::after {
+    content: ''; position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 55% 55% at 15% 75%, rgba(246,166,35,0.05) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  .family-priority .container { position: relative; z-index: 1; }
+
+  /* ── HOW IT WORKS (dark) — dot matrix grid ── */
+  .how-it-works { position: relative; overflow: hidden; }
+  .how-it-works::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 75%);
+    pointer-events: none; z-index: 0;
+  }
+  .how-it-works::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 0%, rgba(246,166,35,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, rgba(246,166,35,0.05) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+  .how-it-works .container { position: relative; z-index: 1; }
+
+  /* ── STAKES (white) — two blobs behind the cards ── */
+  .stakes { position: relative; overflow: hidden; }
+  .stakes::before {
+    content: ''; position: absolute;
+    width: 500px; height: 500px;
+    top: 50%; left: 3%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(239,68,68,0.05) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  .stakes::after {
+    content: ''; position: absolute;
+    width: 500px; height: 500px;
+    top: 50%; right: 3%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  .stakes .container { position: relative; z-index: 1; }
+
+  /* ── PRICING (dark) — large faint hexagon ── */
+  .pricing { position: relative; overflow: hidden; }
+  .pricing::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(246,166,35,0.07) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  .pricing::after {
+    content: ''; position: absolute;
+    width: 600px; height: 600px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(246,166,35,0.06);
+    box-shadow:
+      0 0 0 80px rgba(246,166,35,0.03),
+      0 0 0 160px rgba(246,166,35,0.015);
+    pointer-events: none; z-index: 0;
+  }
+  .pricing .container { position: relative; z-index: 1; }
+
+  /* ── FINAL CTA (dark) — starburst ── */
+  .final-cta::after {
+    content: ''; position: absolute;
+    width: 800px; height: 800px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+      from 0deg,
+      rgba(246,166,35,0.0) 0deg, rgba(246,166,35,0.03) 1.5deg, rgba(246,166,35,0.0) 3deg,
+      rgba(246,166,35,0.0) 23deg, rgba(246,166,35,0.025) 24.5deg, rgba(246,166,35,0.0) 26deg,
+      rgba(246,166,35,0.0) 46deg, rgba(246,166,35,0.02) 47.5deg, rgba(246,166,35,0.0) 49deg,
+      rgba(246,166,35,0.0) 69deg, rgba(246,166,35,0.025) 70.5deg, rgba(246,166,35,0.0) 72deg,
+      rgba(246,166,35,0.0) 92deg, rgba(246,166,35,0.02) 93.5deg, rgba(246,166,35,0.0) 95deg,
+      rgba(246,166,35,0.0) 115deg, rgba(246,166,35,0.025) 116.5deg, rgba(246,166,35,0.0) 118deg,
+      rgba(246,166,35,0.0) 138deg, rgba(246,166,35,0.02) 139.5deg, rgba(246,166,35,0.0) 141deg,
+      rgba(246,166,35,0.0) 161deg, rgba(246,166,35,0.025) 162.5deg, rgba(246,166,35,0.0) 164deg,
+      rgba(246,166,35,0.0) 184deg, rgba(246,166,35,0.02) 185.5deg, rgba(246,166,35,0.0) 187deg,
+      rgba(246,166,35,0.0) 207deg, rgba(246,166,35,0.025) 208.5deg, rgba(246,166,35,0.0) 210deg,
+      rgba(246,166,35,0.0) 230deg, rgba(246,166,35,0.02) 231.5deg, rgba(246,166,35,0.0) 233deg,
+      rgba(246,166,35,0.0) 253deg, rgba(246,166,35,0.025) 254.5deg, rgba(246,166,35,0.0) 256deg,
+      rgba(246,166,35,0.0) 276deg, rgba(246,166,35,0.02) 277.5deg, rgba(246,166,35,0.0) 279deg,
+      rgba(246,166,35,0.0) 299deg, rgba(246,166,35,0.025) 300.5deg, rgba(246,166,35,0.0) 302deg,
+      rgba(246,166,35,0.0) 322deg, rgba(246,166,35,0.02) 323.5deg, rgba(246,166,35,0.0) 325deg,
+      rgba(246,166,35,0.0) 345deg, rgba(246,166,35,0.025) 346.5deg, rgba(246,166,35,0.0) 348deg,
+      rgba(246,166,35,0.0) 360deg
+    );
+    pointer-events: none; z-index: 0;
+  }
+
+
+  /* ══ 1. NAV SCROLL ENHANCEMENT ══ */
+  nav { transition: background 0.3s, box-shadow 0.3s, border-bottom 0.3s; border-bottom: 1px solid transparent; }
+  nav.scrolled {
+    background: rgba(15,23,42,0.98) !important;
+    box-shadow: 0 1px 0 rgba(246,166,35,0.15), 0 8px 32px rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(246,166,35,0.12);
+    backdrop-filter: blur(20px);
+  }
+
+  /* ══ 2. ROTATING GRADIENT AVATAR RING ══ */
+  .author-avatar {
+    background: transparent !important;
+    border: none !important;
+    position: relative;
+    padding: 2px;
+  }
+  .author-avatar::before {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--orange), rgba(246,166,35,0.2), var(--orange));
+    animation: avatarSpin 3s linear infinite;
+    z-index: 0;
+  }
+  .author-avatar::after {
+    content: attr(data-initial);
+    position: absolute; inset: 2px;
+    border-radius: 50%;
+    background: #1e293b;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; color: var(--orange);
+    z-index: 1;
+  }
+  /* Hide original text — shown via ::after */
+  .author-avatar { color: transparent; font-size: 0; }
+  @keyframes avatarSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ══ 3. SECTION LABEL TREATMENT ══ */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  .section-label::before {
+    content: '';
+    width: 3px; height: 14px;
+    border-radius: 2px;
+    background: var(--orange);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(246,166,35,0.5);
+  }
+
+  /* ══ 4. PRICING CARD GLOW ══ */
+  .price-card.paid {
+    box-shadow:
+      0 0 0 1px rgba(246,166,35,0.15),
+      0 8px 32px rgba(246,166,35,0.12),
+      0 32px 64px rgba(246,166,35,0.08),
+      0 -4px 24px rgba(246,166,35,0.06) !important;
+    position: relative;
+  }
+  .price-card.paid::before {
+    content: '';
+    position: absolute; bottom: -24px; left: 10%; right: 10%;
+    height: 40px;
+    background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(246,166,35,0.18) 0%, transparent 100%);
+    filter: blur(8px);
+    pointer-events: none; z-index: -1;
+  }
+
+  /* ══ 5. FOOTER WATERMARK ══ */
+  footer {
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: 'ArkaX';
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 9rem; font-weight: 800;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -4px;
+    pointer-events: none;
+    line-height: 1;
+  }
+  footer::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(246,166,35,0.25), transparent);
+  }
+
+  /* ══ 6. SCROLL-TO-TOP PULSE ══ */
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 4px 16px rgba(246,166,35,0.4); }
+    50%       { box-shadow: 0 4px 24px rgba(246,166,35,0.7), 0 0 0 6px rgba(246,166,35,0.1); }
+  }
+  .scroll-top.visible { animation: breathe 2.5s ease-in-out infinite; }
+
+  /* ══ 7. GUIDE BRIDGE ANIMATED BORDER ══ */
+  .guide-bridge {
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+  }
+  .guide-bridge::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 12px;
+    background: rgba(246,166,35,0.07);
+    border: 1px solid rgba(246,166,35,0.2);
+    pointer-events: none;
+  }
+  @keyframes dashDraw {
+    from { stroke-dashoffset: 1000; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .guide-bridge.visible .bridge-border-svg rect {
+    animation: dashDraw 1.2s ease forwards;
+  }
+  .bridge-border-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; overflow: visible;
+  }
+  .bridge-border-svg rect {
+    fill: none;
+    stroke: rgba(246,166,35,0.45);
+    stroke-width: 1.2;
+    stroke-dasharray: 8 5;
+    stroke-dashoffset: 1000;
+    rx: 12; ry: 12;
+  }
+
+  /* ══ 8. TABLE ROW HOVER ══ */
+  tbody tr { transition: background 0.18s; }
+  tbody tr:hover td { background: rgba(246,166,35,0.03); }
+  tbody tr:hover td.arkax-col {
+    background: linear-gradient(180deg, rgba(246,166,35,0.09) 0%, rgba(246,166,35,0.06) 100%) !important;
+  }
+
+  /* ══ 9. BUTTON SHIMMER ══ */
+  .btn-primary {
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: none;
+  }
+  .btn-primary:hover::after {
+    left: 160%;
+    transition: left 0.5s ease;
+  }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -497,6 +1057,7 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
   <!-- Subjects pre-reveal overlay -->
   <div id="hero-subjects">
     <span class="hs-word">Medicine</span><span class="hs-sep">&nbsp;/&nbsp;</span><span class="hs-word">Law</span><span class="hs-sep">&nbsp;/&nbsp;</span><span class="hs-word">Design</span><span class="hs-sep">&nbsp;/&nbsp;</span><span class="hs-word">Coding</span><span class="hs-sep">&nbsp;/&nbsp;</span><span class="hs-word">Arts</span><span class="hs-sep">&nbsp;/&nbsp;</span><span class="hs-word">Engineering</span>
@@ -507,13 +1068,14 @@
     <span class="l2">Almost no one stays to see if it’s working.</span>
     <span class="l3">Students drift. Parents panic.</span>
   </h2>
-  <p class="subhead">Most guidance ends at selection. ArkaX tracks progress, spots trouble early, and steers students back on course — before a bad term becomes a lost year.</p>
+  <p class="subhead">Most guidance ends at selection. ArkaX tracks progress, spots trouble early, and steers students back on course — before a bad semester becomes a lost year.</p>
   <div class="ctas">
     <a href="#get-started" class="btn-primary">Start Free →</a>
     <a href="#how-it-works" class="btn-secondary">See How It Works</a>
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,56 C240,10 480,48 720,28 C960,8 1200,46 1440,20 L1440,0 L0,0 Z" fill="#ffffff"/></svg></div>
 <!-- PROBLEM -->
 <section class="problem">
   <div class="container">
@@ -555,6 +1117,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C240,46 480,8 720,28 C960,48 1200,10 1440,36 L1440,56 L0,56 Z" fill="#ffffff"/></svg></div>
 <!-- GUIDE -->
 <section class="guide">
   <div class="container">
@@ -566,7 +1129,7 @@
         <span class="quote-mark">"</span>
         <p class="quote-text">I had attempted those assessments. I felt so good and acknowledged that how can I reach my goals in future. The experience was nice.</p>
         <div class="quote-author">
-          <div class="author-avatar">H</div>
+          <div class="author-avatar" data-initial="H">H</div>
           <div>
             <div class="author-name">Harshit</div>
             <div class="author-detail">Class 9 · Panineeya Mahavidyalaya Public School</div>
@@ -577,7 +1140,7 @@
         <span class="quote-mark">"</span>
         <p class="quote-text">It helped me to understand my interests, abilities, and career preference. These assessments encouraged me to plan better for my future career.</p>
         <div class="quote-author">
-          <div class="author-avatar">A</div>
+          <div class="author-avatar" data-initial="A">A</div>
           <div>
             <div class="author-name">Akshya</div>
             <div class="author-detail">Class 9 · Panineeya Mahavidyalaya Public School</div>
@@ -585,13 +1148,14 @@
         </div>
       </div>
     </div>
-    <div class="guide-bridge reveal">
+    <div class="guide-bridge reveal"><svg class="bridge-border-svg" aria-hidden="true"><rect x="0.6" y="0.6" width="calc(100% - 1.2px)" height="calc(100% - 1.2px)" rx="11.4" ry="11.4"/></svg>
       <p>The assessment is just the beginning. <strong>ArkaX stays with your child from that first moment of clarity all the way to college admission.</strong></p>
       <div class="bridge-arrow">→</div>
     </div>
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,56 C240,10 480,48 720,28 C960,8 1200,46 1440,20 L1440,0 L0,0 Z" fill="#0f172a"/></svg></div>
 <!-- COMPARISON -->
 <section class="comparison">
   <div class="container">
@@ -668,6 +1232,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C240,46 480,8 720,28 C960,48 1200,10 1440,36 L1440,56 L0,56 Z" fill="#0f172a"/></svg></div>
 <!-- TWO PANEL -->
 <section class="two-panel" id="parents">
   <div class="container">
@@ -714,6 +1279,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,56 C240,10 480,48 720,28 C960,8 1200,46 1440,20 L1440,0 L0,0 Z" fill="#f8fafc"/></svg></div>
 <!-- FAMILY PRIORITY -->
 <section class="family-priority">
   <div class="container">
@@ -726,17 +1292,18 @@
       </div>
       <div class="priority-card reveal">
         <div class="card-title">Your Family's Priority Profile</div>
-        <div class="priority-item"><div class="priority-rank rank-high">1</div><div class="priority-name">Job security & stability</div><div class="bar-wrap"><div class="bar-fill" style="width:92%"></div></div></div>
-        <div class="priority-item"><div class="priority-rank rank-high">2</div><div class="priority-name">College reputation</div><div class="bar-wrap"><div class="bar-fill" style="width:80%"></div></div></div>
-        <div class="priority-item"><div class="priority-rank rank-high">3</div><div class="priority-name">Student's personal interest</div><div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div></div>
-        <div class="priority-item"><div class="priority-rank rank-med">4</div><div class="priority-name">Salary potential</div><div class="bar-wrap"><div class="bar-fill med" style="width:55%"></div></div></div>
-        <div class="priority-item"><div class="priority-rank rank-low">5</div><div class="priority-name">Stay in home city</div><div class="bar-wrap"><div class="bar-fill med" style="width:28%"></div></div></div>
-        <div class="match-result"><div class="match-score">91%</div><div class="match-text"><strong>Science → JEE path</strong> satisfies your top 3 priorities. Your family is aligned with your student's chosen direction.</div></div>
+        <div class="priority-item"><div class="priority-rank rank-high">1</div><div class="priority-name">Job security & stability</div><div class="bar-wrap"><div class="bar-fill" style="--w:92%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-high">2</div><div class="priority-name">College reputation</div><div class="bar-wrap"><div class="bar-fill" style="--w:80%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-high">3</div><div class="priority-name">Student's personal interest</div><div class="bar-wrap"><div class="bar-fill" style="--w:70%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-med">4</div><div class="priority-name">Salary potential</div><div class="bar-wrap"><div class="bar-fill med" style="--w:55%"></div></div></div>
+        <div class="priority-item"><div class="priority-rank rank-low">5</div><div class="priority-name">Stay in home city</div><div class="bar-wrap"><div class="bar-fill med" style="--w:28%"></div></div></div>
+        <div class="match-result"><div class="match-score counter" data-target="91" data-suffix="%">0%</div><div class="match-text"><strong>Science → JEE path</strong> satisfies your top 3 priorities. Your family is aligned with your student's chosen direction.</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C240,46 480,8 720,28 C960,48 1200,10 1440,36 L1440,56 L0,56 Z" fill="#0f172a"/></svg></div>
 <!-- HOW IT WORKS -->
 <section class="how-it-works" id="how-it-works">
   <div class="container">
@@ -746,17 +1313,17 @@
       <p class="section-intro reveal">No complicated setup. No long calls before you can start. You can begin in minutes — at any point in grades 9–12.</p>
     </div>
     <div class="steps">
-      <div class="step reveal">
+      <div class="step reveal" data-step="1">
         <div class="step-num">1</div>
         <h3>Understand your strengths and interests</h3>
         <p>A short assessment covering your strengths, interests, and what matters to your family. Takes about 30 minutes. No right or wrong answers.</p>
       </div>
-      <div class="step reveal">
+      <div class="step reveal" data-step="2">
         <div class="step-num">2</div>
         <h3>Get a recommendation built for you</h3>
         <p>Receive a personalised stream recommendation matched across 186+ career paths — aligned with your strengths and your family's priorities. All streams are compliant with NEP 2020.</p>
       </div>
-      <div class="step reveal">
+      <div class="step reveal" data-step="3">
         <div class="step-num">3</div>
         <h3>Follow your roadmap all the way to college</h3>
         <p>A milestone-based plan that checks in, adjusts when needed, and stays with you — from your first assessment to college admission.</p>
@@ -766,6 +1333,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,56 C240,10 480,48 720,28 C960,8 1200,46 1440,20 L1440,0 L0,0 Z" fill="#0f172a"/></svg></div>
 <!-- STAKES -->
 <section class="stakes">
   <div class="container">
@@ -800,6 +1368,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C240,46 480,8 720,28 C960,48 1200,10 1440,36 L1440,56 L0,56 Z" fill="#0f172a"/></svg></div>
 <!-- PRICING -->
 <section class="pricing" id="get-started">
   <div class="container">
@@ -823,7 +1392,7 @@
       <div class="price-card paid reveal">
         <div class="price-badge">Full Journey</div>
         <div class="price-tier">Complete</div>
-        <div class="price-amount">₹5,999</div>
+        <div class="price-amount counter" data-target="5999" data-prefix="₹" data-comma="true">₹0</div>
         <div class="price-period">Per year · one student</div>
         <div class="price-divider"></div>
         <ul class="price-features">
@@ -842,6 +1411,7 @@
   </div>
 </section>
 
+<div class="wave-divider" aria-hidden="true"><svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,56 C240,10 480,48 720,28 C960,8 1200,46 1440,20 L1440,0 L0,0 Z" fill="#0f172a"/></svg></div>
 <!-- FINAL CTA -->
 <section class="final-cta">
   <div class="inner">
@@ -919,6 +1489,181 @@ function toggleMenu() {
   }, revealAt);
 })();
 </script>
+<script>
+// ── HERO CANVAS — career constellation ──
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
+  const CAREERS = ['Medicine','Law','Design','Coding','Arts','Engineering','Finance','Research','Teaching','Architecture'];
+  let W, H, nodes = [], animId;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    nodes = [];
+    // Center node — ArkaX
+    nodes.push({ x: W * 0.5, y: H * 0.5, vx: 0, vy: 0, r: 3.5, center: true, opacity: 0.9 });
+    // Career nodes orbiting
+    const count = 28;
+    for (let i = 0; i < count; i++) {
+      const angle  = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+      const radius = 90 + Math.random() * 220;
+      nodes.push({
+        x:  W * 0.5 + Math.cos(angle) * radius,
+        y:  H * 0.5 + Math.sin(angle) * radius,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r:  1.2 + Math.random() * 1.8,
+        center: false,
+        opacity: 0.2 + Math.random() * 0.4,
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const cx = nodes[0].x, cy = nodes[0].y;
+
+    // Draw connections from center to nearby nodes
+    for (let i = 1; i < nodes.length; i++) {
+      const n = nodes[i];
+      const dx = n.x - cx, dy = n.y - cy;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 260) {
+        const alpha = (1 - dist / 260) * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(n.x, n.y);
+        ctx.strokeStyle = `rgba(246,166,35,${alpha})`;
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+    }
+
+    // Node-to-node connections (close ones)
+    for (let i = 1; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 110) {
+          const alpha = (1 - dist / 110) * 0.06;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(148,163,184,${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw nodes
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      if (n.center) {
+        // Center: glowing dot
+        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 18);
+        grad.addColorStop(0, 'rgba(246,166,35,0.35)');
+        grad.addColorStop(1, 'rgba(246,166,35,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 18, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(246,166,35,0.9)';
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(148,163,184,${n.opacity})`;
+        ctx.fill();
+      }
+    }
+  }
+
+  function tick() {
+    for (let i = 1; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.x += n.vx;
+      n.y += n.vy;
+      // Gentle wrap
+      if (n.x < -20) n.x = W + 20;
+      if (n.x > W + 20) n.x = -20;
+      if (n.y < -20) n.y = H + 20;
+      if (n.y > H + 20) n.y = -20;
+    }
+    draw();
+    animId = requestAnimationFrame(tick);
+  }
+
+  resize();
+  init();
+  tick();
+  window.addEventListener('resize', () => { resize(); init(); });
+})();
+
+// ── SCROLL PROGRESS ──
+const bar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  if (bar) bar.style.width = (p * 100) + '%';
+}, { passive: true });
+
+// ── ANIMATED COUNTERS ──
+(function() {
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const run = el => {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const comma  = el.dataset.comma === 'true';
+    const start  = performance.now();
+    const tick   = now => {
+      const p = Math.min((now - start) / 1400, 1);
+      const v = Math.floor(easeOut(p) * target);
+      el.textContent = prefix + (comma ? v.toLocaleString('en-IN') : v) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        run(e.target);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.counter').forEach(el => obs.observe(el));
+})();
+
+// ── ANIMATED BARS ──
+(function() {
+  const card = document.querySelector('.priority-card');
+  if (!card) return;
+  const obs = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('bars-run');
+      obs.unobserve(e.target);
+    }
+  }, { threshold: 0.2 });
+  obs.observe(card);
+})();
+
+// ── NAV ON SCROLL ──
+(function() {
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
