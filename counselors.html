@@ -1,293 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>For Counselors | ArkaX</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script async defer src="https://use.fontawesome.com/releases/v6.5.2/js/all.js"></script>
-  <style>
-    :root {
-      --navy:#2D3E50;--navy-dark:#1C2A3A;--navy-light:#3D5468;
-      --orange:#E8A317;--orange-dark:#C48A0E;--orange-light:#FFF9EE;
-      --teal:#0D9488;--teal-dark:#0B7C72;--teal-light:#CCFBF1;
-      --red:#dc2626;--red-light:#fef2f2;
-      --purple:#7c3aed;--purple-light:#f3e8ff;
-      --g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g400:#9ca3af;
-      --g500:#6b7280;--g600:#4b5563;--g700:#374151;
-      --white:#fff;
-      --font:'Plus Jakarta Sans',sans-serif;
-      --max-w:1120px;--header-h:72px;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--font);color:var(--navy-dark);line-height:1.6;background:var(--white);overflow-x:hidden}
-    img{max-width:100%;display:block}
-    a{color:var(--teal);text-decoration:none}
-    .container{max-width:var(--max-w);margin:0 auto;padding:0 1.25rem}
-    [x-cloak]{display:none!important}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArkaX — For Career Counselors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple:        #7C3AED;
+            --purple-dark:   #6D28D9;
+            --purple-mid:    #8B5CF6;
+            --purple-light:  #DDD6FE;
+            --purple-pale:   #F5F3FF;
+            --purple-xpale:  #FAFAF9;
+            --navy:          #1C1035;
+            --navy-mid:      #2D1B6E;
+            --white:         #ffffff;
+            --slate-50:      #f8fafc;
+            --slate-100:     #f1f5f9;
+            --slate-200:     #e2e8f0;
+            --slate-300:     #cbd5e1;
+            --slate-400:     #94a3b8;
+            --slate-500:     #64748b;
+            --slate-600:     #475569;
+            --slate-700:     #334155;
+            --slate-800:     #1e293b;
+            --slate-900:     #0f172a;
+            --green:         #22c55e;
+            --red:           #ef4444;
+            --section-gap:   96px;
+        }
 
-    /* HEADER */
-    .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:#1C2A3A;border-bottom:1px solid rgba(255,255,255,0.08);transition:box-shadow 0.3s}
-    .site-header.scrolled{box-shadow:0 4px 24px rgba(0,0,0,0.4)}
-    .header-inner{width:100%;padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:100%;box-sizing:border-box}
-    .logo-link img{height:36px;width:auto;filter:none}
-    .nav-desktop{display:flex;align-items:center;gap:32px}
-    .nav-link{font-size:.875rem;font-weight:500;color:rgba(255,255,255,0.75);padding:.45rem .85rem;border-radius:6px;transition:all .2s;white-space:nowrap;text-decoration:none}
-    .nav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
-    .nav-link.active{color:#fff;background:rgba(255,255,255,0.1)}
-    .nav-login{font-size:.875rem;font-weight:500;color:rgba(255,255,255,0.85);padding:.45rem 1rem;border-radius:6px;border:1px solid rgba(255,255,255,0.3);transition:all .2s;white-space:nowrap;text-decoration:none;margin-left:.5rem}
-    .nav-login:hover{color:#fff;border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.05)}
-    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;color:rgba(255,255,255,0.8);font-size:1.25rem}
-    .mobile-menu{position:fixed;top:var(--header-h);left:0;right:0;bottom:0;background:#1C2A3A;z-index:999;padding:1.5rem;display:flex;flex-direction:column;gap:.25rem;overflow-y:auto;border-top:1px solid rgba(255,255,255,0.08)}
-    .mobile-menu .nav-link{display:block;font-size:1rem;padding:.75rem 1rem;border-radius:8px;color:rgba(255,255,255,0.8)}
-    .mobile-menu .nav-login{display:block;font-size:1rem;padding:.75rem 1rem;border-radius:8px;border:1px solid rgba(255,255,255,0.25);text-align:center;margin:0;margin-top:.5rem;color:rgba(255,255,255,0.85)}
-    .mobile-menu .nav-cta {
-  background: #7C3AED;
-  color: #ffffff;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.88rem;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-    @media(max-width:768px){.nav-desktop{display:none}.hamburger{display:block}}
-    .nav-cta {
-  background: #7C3AED;
-  color: #ffffff;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.88rem;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-    .nav-cta:hover {
-  background: #6D28D9;
-  color: #ffffff;
-}
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--white);
+            color: var(--slate-800);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-    /* PAGE HERO */
-    .page-hero{padding:calc(var(--header-h) + 4rem) 0 4rem;background:linear-gradient(170deg,#F4F7FA 0%,#fff 55%,#F0FDF4 100%);text-align:center;position:relative;overflow:hidden}
-    .page-hero::before{content:'';position:absolute;top:-150px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,0.07) 0%,transparent 70%);pointer-events:none}
-    .page-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal-light);border:1px solid rgba(13,148,136,0.25);padding:.4rem 1rem;border-radius:999px;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal-dark);margin-bottom:1.25rem}
-    .page-hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.15;color:var(--navy-dark);font-weight:800;margin-bottom:1rem;max-width:720px;margin-left:auto;margin-right:auto}
-    .page-hero h1 em{font-style:normal;color:var(--teal)}
-    .page-hero p{font-size:1.05rem;color:var(--g600);max-width:560px;margin:0 auto}
+        /* ═══ NAV ═══ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--slate-200);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 12px rgba(124,58,237,0.06);
+        }
 
-    /* SECTION SHARED */
-    .section-eyebrow{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:.75rem}
-    .section-title{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;color:var(--navy-dark);margin-bottom:1.25rem;font-weight:800}
-    .section-desc{font-size:1rem;color:var(--g600);max-width:600px;line-height:1.6}
+        .nav-logo { text-decoration: none; display: flex; align-items: center; }
 
-    /* SCHOOLS */
-    .schools-section{padding:5rem 0;background:var(--g50)}
-    .school-advantages{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:860px;margin:2.5rem auto 2rem}
-    .school-adv-card{background:var(--white);border-radius:16px;padding:1.75rem;border:1px solid var(--g200);transition:all .3s;position:relative;overflow:hidden;border-left:4px solid transparent}
-    .school-adv-card:nth-child(1){border-left-color:var(--orange);background:linear-gradient(135deg,#FFF9EE 0%,#fff 40%)}
-    .school-adv-card:nth-child(2){border-left-color:var(--teal);background:linear-gradient(135deg,#F0FDF4 0%,#fff 40%)}
-    .school-adv-card:nth-child(3){border-left-color:#D97706;background:linear-gradient(135deg,#FFFBEB 0%,#fff 40%)}
-    .school-adv-card:nth-child(4){border-left-color:var(--navy);background:linear-gradient(135deg,#E8EEF4 0%,#fff 40%)}
-    .school-adv-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-    .school-adv-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;pointer-events:none;opacity:0.06}
-    .school-adv-card:nth-child(1)::after{background:var(--orange)}
-    .school-adv-card:nth-child(2)::after{background:var(--teal)}
-    .school-adv-card:nth-child(3)::after{background:#D97706}
-    .school-adv-card:nth-child(4)::after{background:var(--navy)}
-    .school-adv-icon{width:3rem;height:3rem;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:1rem;transition:transform .3s}
-    .school-adv-card:hover .school-adv-icon{transform:scale(1.15) rotate(-5deg)}
-    .school-adv-card:nth-child(1) .school-adv-icon{background:var(--orange);color:var(--white)}
-    .school-adv-card:nth-child(2) .school-adv-icon{background:var(--teal);color:var(--white)}
-    .school-adv-card:nth-child(3) .school-adv-icon{background:#D97706;color:var(--white)}
-    .school-adv-card:nth-child(4) .school-adv-icon{background:var(--navy);color:var(--white)}
-    .school-adv-card h4{font-weight:700;font-size:1rem;color:var(--navy-dark);margin-bottom:.4rem}
-    .school-adv-card p{font-size:.88rem;color:var(--g600);line-height:1.5}
-    .school-tagline{text-align:center;font-style:italic;font-size:.95rem;color:var(--orange-dark);margin-bottom:2rem}
-    .school-cta{text-align:center}
-    .btn-demo{background:var(--navy);color:var(--white)!important;font-weight:600;padding:.8rem 2rem;border-radius:12px;font-size:1rem;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;position:relative;overflow:hidden}
-    .btn-demo:hover{background:var(--navy-dark);transform:translateY(-2px);color:var(--white)!important}
+        .nav-right { display: flex; align-items: center; gap: 28px; }
 
-    /* COUNSELORS */
-    .counselors-section{padding:5rem 0;background:var(--white)}
-    .counselors-body{text-align:center;font-size:1rem;color:var(--g600);max-width:560px;margin:-.5rem auto 2rem;line-height:1.6}
-    .counselor-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:780px;margin:0 auto 2rem}
-    .counselor-benefit{display:flex;gap:1rem;align-items:flex-start;background:var(--white);border-radius:16px;padding:1.5rem;border:1px solid var(--g200);transition:all .3s;position:relative;overflow:hidden;border-top:3px solid transparent}
-    .counselor-benefit:nth-child(1){border-top-color:#8b5cf6;background:linear-gradient(180deg,#F5F3FF 0%,#fff 30%)}
-    .counselor-benefit:nth-child(2){border-top-color:#0D9488;background:linear-gradient(180deg,#F0FDF4 0%,#fff 30%)}
-    .counselor-benefit:nth-child(3){border-top-color:var(--orange);background:linear-gradient(180deg,#FFF9EE 0%,#fff 30%)}
-    .counselor-benefit:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-    .counselor-benefit-icon{width:2.75rem;height:2.75rem;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.05rem;transition:transform .3s}
-    .counselor-benefit:hover .counselor-benefit-icon{transform:scale(1.15) rotate(-5deg)}
-    .counselor-benefit:nth-child(1) .counselor-benefit-icon{background:#8b5cf6;color:var(--white)}
-    .counselor-benefit:nth-child(2) .counselor-benefit-icon{background:#0D9488;color:var(--white)}
-    .counselor-benefit:nth-child(3) .counselor-benefit-icon{background:var(--orange);color:var(--white)}
-    .counselor-benefit h4{font-weight:700;font-size:.95rem;color:var(--navy-dark);margin-bottom:.3rem}
-    .counselor-benefit p{font-size:.85rem;color:var(--g600);line-height:1.5}
-    .counselor-cta{text-align:center}
-    .btn-counselor{background:var(--purple);color:var(--white)!important;font-weight:600;padding:.8rem 2rem;border-radius:12px;font-size:1rem;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
-    .btn-counselor:hover{background:#6d28d9;transform:translateY(-2px);color:var(--white)!important}
+        .nav-link {
+            font-size: 13px; font-weight: 600;
+            color: var(--slate-500);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--purple); }
 
-    /* HOW IT WORKS */
-    .how-section{padding:5rem 0;background:#F4F7FA}
-    .how-section .section-title,.how-section .section-eyebrow{text-align:center}
-    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2.5rem}
-    .step{background:var(--white);border-radius:16px;padding:2rem 1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1px solid var(--g200);transition:all .3s}
-    .step:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
-    .step-num{width:3rem;height:3rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;margin:0 auto 1.25rem}
-    .step:nth-child(1) .step-num{background:var(--navy);color:var(--white)}
-    .step:nth-child(2) .step-num{background:var(--orange);color:var(--white)}
-    .step:nth-child(3) .step-num{background:var(--teal);color:var(--white)}
-    .step-title{font-weight:700;font-size:1.05rem;color:var(--navy-dark);margin-bottom:.5rem}
-    .step-desc{font-size:.9rem;color:var(--g600);line-height:1.5}
+        .nav-cta {
+            background: var(--purple);
+            color: var(--white);
+            font-size: 13px; font-weight: 800;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+        }
+        .nav-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
 
-    /* FOOTER */
-    .footer{background:var(--navy-dark);color:rgba(255,255,255,0.7);padding:2rem 0;text-align:center;font-size:.875rem}
-    .footer a{color:rgba(255,255,255,0.5);transition:color .2s}
-    .footer a:hover{color:var(--white)}
-    .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.75rem;flex-wrap:wrap}
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 60px;
-    background: rgba(30,41,59,0.97);
-    backdrop-filter: blur(12px);
-  }
-  .nav-logo img { height: 38px; display: block; }
-  .nav-links { display: flex; align-items: center; gap: 32px; margin-left: 80px; }
-  .nav-links a {
-    color: rgba(255,255,255,0.6); font-size: 0.88rem; font-weight: 500;
-    text-decoration: none; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-cta {
-  background: #7C3AED;
-  color: #ffffff;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.88rem;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-  .nav-cta:hover {
-  background: #6D28D9;
-  color: #ffffff;
-}
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(155deg, #F5F3FF 0%, #ffffff 50%, #EDE9FE 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 48px 80px;
+        }
 
-  /* ─── SCROLL TO TOP ─── */
-</style>
+        .hero-grid-bg {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+            background-size: 72px 72px;
+            pointer-events: none;
+        }
+
+        .hero-glow {
+            position: absolute; top: -200px; right: -200px;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 65%);
+            border-radius: 50%; pointer-events: none;
+        }
+
+        .hero-glow-2 {
+            position: absolute; bottom: -300px; left: -150px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%);
+            border-radius: 50%; pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1100px; margin: 0 auto; width: 100%;
+            position: relative; z-index: 2;
+            display: grid; grid-template-columns: 1fr 420px;
+            gap: 80px; align-items: center;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--purple-light);
+            border: 1px solid rgba(124,58,237,0.25);
+            border-radius: 40px;
+            padding: 6px 16px 6px 8px;
+            margin-bottom: 28px;
+        }
+
+        .hero-eyebrow-dot {
+            width: 6px; height: 6px;
+            background: var(--purple);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-eyebrow span {
+            font-size: 11px; font-weight: 700;
+            color: var(--purple-dark);
+            letter-spacing: 1.5px; text-transform: uppercase;
+        }
+
+        .hero-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(40px, 4.5vw, 60px);
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .hero-headline em { font-style: italic; color: var(--purple); }
+
+        .hero-subhead {
+            font-size: 17px; font-weight: 500;
+            color: var(--slate-600);
+            line-height: 1.75;
+            margin-bottom: 40px; max-width: 500px;
+        }
+
+        .hero-subhead strong { color: var(--slate-800); font-weight: 700; }
+
+        .hero-cta-group { display: flex; align-items: center; gap: 20px; }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--purple);
+            color: var(--white);
+            font-size: 15px; font-weight: 800;
+            padding: 16px 32px; border-radius: 10px;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 24px rgba(124,58,237,0.3);
+        }
+        .btn-primary:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(124,58,237,0.4); }
+        .btn-primary .arrow { font-size: 18px; transition: transform 0.2s; }
+        .btn-primary:hover .arrow { transform: translateX(4px); }
+
+        .hero-note { font-size: 13px; font-weight: 500; color: var(--slate-400); }
+
+        /* Hero right card */
+        .hero-card {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 20px; padding: 32px;
+            box-shadow: 0 8px 32px rgba(124,58,237,0.08);
+        }
+
+        .hero-card-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--purple); margin-bottom: 20px;
+        }
+
+        .hero-pain-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+        .hero-pain-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 14px 16px;
+            background: var(--purple-pale);
+            border: 1px solid var(--purple-light);
+            border-radius: 10px;
+        }
+
+        .pain-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+        .pain-text {
+            font-size: 13px; font-weight: 500;
+            color: var(--slate-600); line-height: 1.5;
+        }
+
+        .pain-text strong {
+            color: var(--slate-800); font-weight: 700;
+            display: block; margin-bottom: 2px;
+        }
+
+        /* ═══ SECTION WRAPPER ═══ */
+        .section { padding: var(--section-gap) 48px; }
+
+        .section-inner { max-width: 1100px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: var(--purple); margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(32px, 3vw, 46px);
+            font-weight: 800; color: var(--slate-900);
+            line-height: 1.15; letter-spacing: -0.8px;
+            margin-bottom: 20px;
+        }
+
+        .section-title em { font-style: italic; color: var(--purple-mid); }
+
+        /* ═══ PROBLEM ═══ */
+        .problem-section {
+            background: var(--purple-pale);
+            border-top: 1px solid var(--purple-light);
+            border-bottom: 1px solid var(--purple-light);
+        }
+
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+        .problem-body {
+            font-size: 17px; font-weight: 500;
+            color: var(--slate-600); line-height: 1.8; margin-bottom: 20px;
+        }
+
+        .problem-body strong { color: var(--slate-900); font-weight: 700; }
+
+        .problem-callout {
+            display: flex; align-items: flex-start; gap: 16px;
+            background: var(--navy);
+            border-radius: 14px; padding: 24px; margin-top: 32px;
+        }
+
+        .problem-callout-icon { font-size: 28px; flex-shrink: 0; }
+
+        .problem-callout-text {
+            font-size: 15px; font-weight: 600;
+            color: var(--white); line-height: 1.6; font-style: italic;
+        }
+
+        .problem-visual { display: flex; flex-direction: column; gap: 12px; }
+
+        .problem-burden-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 18px 20px;
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+
+        .problem-burden-item:hover { transform: translateX(4px); }
+
+        .pb-emoji { font-size: 22px; flex-shrink: 0; }
+
+        .pb-content h4 { font-size: 13px; font-weight: 700; color: var(--slate-800); margin-bottom: 2px; }
+        .pb-content p { font-size: 12px; font-weight: 500; color: var(--slate-500); }
+
+        .pb-tag {
+            margin-left: auto;
+            background: var(--purple-pale);
+            border: 1px solid var(--purple-light);
+            color: var(--purple-dark);
+            font-size: 10px; font-weight: 700;
+            padding: 4px 10px; border-radius: 20px;
+            white-space: nowrap; flex-shrink: 0;
+        }
+
+        /* ═══ MISSING ═══ */
+        .missing-section { background: var(--white); }
+
+        .missing-centered { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+        .missing-centered p { font-size: 18px; font-weight: 500; color: var(--slate-500); line-height: 1.8; }
+        .missing-centered p strong { color: var(--slate-800); font-weight: 700; }
+
+        .missing-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+        .pillar {
+            background: var(--purple-pale);
+            border: 1px solid var(--purple-light);
+            border-top: 4px solid var(--purple);
+            border-radius: 14px; padding: 28px 20px; text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(124,58,237,0.12); }
+
+        .pillar-icon { font-size: 36px; margin-bottom: 16px; }
+
+        .pillar h3 { font-size: 14px; font-weight: 800; color: var(--slate-800); margin-bottom: 8px; }
+        .pillar p { font-size: 12px; font-weight: 500; color: var(--slate-500); line-height: 1.6; }
+
+        /* ═══ SUPPORT (dark section) ═══ */
+        .support-section {
+            background: var(--navy);
+            position: relative; overflow: hidden;
+        }
+
+        .support-section::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(139,92,246,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139,92,246,0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .support-inner { position: relative; z-index: 2; }
+
+        .support-header { text-align: center; margin-bottom: 64px; }
+        .support-header .section-title { color: var(--white); }
+        .support-header .section-label { text-align: center; color: var(--purple-light); }
+
+        .support-header p {
+            font-size: 17px; font-weight: 500;
+            color: rgba(255,255,255,0.55);
+            max-width: 560px; margin: 16px auto 0; line-height: 1.75;
+        }
+
+        .support-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+        .support-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 16px; padding: 28px;
+            transition: background 0.25s, border-color 0.25s;
+        }
+
+        .support-card:hover { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.4); }
+
+        .sc-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 18px;
+        }
+
+        .sc-title { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+
+        .sc-body { font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+        .support-divider {
+            display: flex; align-items: center; gap: 24px;
+            margin-top: 48px; padding: 28px 36px;
+            background: rgba(139,92,246,0.1);
+            border: 1px solid rgba(139,92,246,0.25);
+            border-radius: 16px;
+        }
+
+        .support-divider-text { font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.4; }
+        .support-divider-text em { color: var(--purple-light); font-style: normal; }
+
+        .divider-icon { font-size: 40px; flex-shrink: 0; }
+
+        /* ═══ WORKING MODEL ═══ */
+        .model-section { background: var(--white); }
+
+        .model-header { text-align: center; margin-bottom: 64px; }
+
+        .model-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0; align-items: start; }
+
+        .model-step { padding: 36px 28px; text-align: center; }
+
+        .model-step-num {
+            width: 52px; height: 52px;
+            background: var(--purple);
+            color: var(--white);
+            font-size: 20px; font-weight: 900;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            box-shadow: 0 6px 20px rgba(124,58,237,0.3);
+        }
+
+        .model-step h3 { font-size: 17px; font-weight: 800; color: var(--slate-800); margin-bottom: 10px; }
+        .model-step p { font-size: 14px; font-weight: 500; color: var(--slate-500); line-height: 1.7; }
+
+        .model-step-who {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--purple-pale);
+            border: 1px solid var(--purple-light);
+            border-radius: 20px; padding: 5px 12px;
+            font-size: 11px; font-weight: 700;
+            color: var(--purple-dark); margin-bottom: 16px;
+        }
+
+        .model-arrow {
+            display: flex; align-items: center; justify-content: center;
+            padding-top: 52px; color: var(--purple-light); font-size: 28px;
+        }
+
+        .model-footer-note {
+            margin-top: 48px; text-align: center;
+            padding: 28px 40px;
+            background: var(--purple-pale);
+            border: 1px solid var(--purple-light);
+            border-radius: 16px;
+        }
+
+        .model-footer-note p { font-size: 16px; font-weight: 600; color: var(--slate-700); font-style: italic; }
+        .model-footer-note strong { color: var(--purple-dark); font-style: normal; }
+
+        /* ═══ OUTCOMES ═══ */
+        .outcomes-section {
+            background: var(--purple-pale);
+            border-top: 1px solid var(--purple-light);
+        }
+
+        .outcomes-header { text-align: center; margin-bottom: 56px; }
+
+        .outcomes-header p {
+            font-size: 17px; font-weight: 500;
+            color: var(--slate-500); max-width: 520px;
+            margin: 16px auto 0; line-height: 1.75;
+        }
+
+        .comparison-wrapper {
+            border: 1px solid var(--slate-200);
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        .comparison-header {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            background: var(--navy);
+        }
+
+        .ch-blank { padding: 20px 28px; }
+
+        .ch-col { padding: 20px 28px; text-align: center; border-left: 1px solid rgba(255,255,255,0.08); }
+        .ch-col.bad .ch-label { color: #fca5a5; }
+        .ch-col.good .ch-label { color: var(--purple-light); }
+
+        .ch-icon { font-size: 20px; margin-bottom: 4px; }
+        .ch-label { font-size: 13px; font-weight: 800; color: var(--white); letter-spacing: 0.5px; }
+
+        .comparison-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            border-top: 1px solid var(--slate-200);
+            background: var(--white); transition: background 0.15s;
+        }
+
+        .comparison-row:hover { background: var(--purple-pale); }
+
+        .cr-aspect { padding: 18px 28px; font-size: 14px; font-weight: 700; color: var(--slate-700); display: flex; align-items: center; }
+        .cr-bad { padding: 18px 28px; border-left: 1px solid var(--slate-200); display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: #b91c1c; }
+        .cr-good { padding: 18px 28px; border-left: 1px solid var(--slate-200); display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--purple-dark); }
+
+        .cr-dot-bad { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+        .cr-dot-good { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; flex-shrink: 0; }
+
+        .outcome-narrative { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+
+        .on-card { border-radius: 16px; padding: 28px; }
+        .on-card.without { background: #fef2f2; border: 1px solid #fecaca; }
+        .on-card.with { background: var(--purple-pale); border: 1px solid var(--purple-light); }
+
+        .on-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+        .on-card.without .on-label { color: #991b1b; }
+        .on-card.with .on-label { color: var(--purple-dark); }
+
+        .on-text { font-size: 14.5px; font-weight: 500; line-height: 1.75; }
+        .on-card.without .on-text { color: #7f1d1d; }
+        .on-card.with .on-text { color: var(--navy-mid); }
+
+        /* ═══ FINAL CTA ═══ */
+        .final-cta {
+            background: var(--navy);
+            padding: var(--section-gap) 48px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: ''; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 800px; height: 400px;
+            background: radial-gradient(ellipse, rgba(124,58,237,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .final-cta-inner { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+
+        .final-cta .section-label { justify-content: center; display: flex; margin-bottom: 20px; color: var(--purple-light); }
+
+        .final-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(36px, 4vw, 54px);
+            font-weight: 800; color: var(--white);
+            line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 20px;
+        }
+
+        .final-headline em { font-style: italic; color: var(--purple-light); }
+
+        .final-sub { font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 40px; }
+
+        .final-cta-buttons { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: transparent; color: rgba(255,255,255,0.65);
+            font-size: 14px; font-weight: 600;
+            padding: 14px 28px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            text-decoration: none; transition: all 0.2s;
+        }
+        .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            background: var(--slate-900); padding: 28px 48px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { font-size: 12px; font-weight: 600; color: var(--slate-400); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--purple-light); }
+
+        .footer-copy { font-size: 12px; color: var(--slate-600); }
+
+        /* ═══ ANIMATIONS ═══ */
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up { animation: fade-up 0.7s ease both; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 900px) {
+            nav { padding: 0 24px; }
+            .hero, .section, .final-cta { padding-left: 24px; padding-right: 24px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+            .hero-card { display: none; }
+            .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+            .missing-pillars { grid-template-columns: 1fr 1fr; }
+            .support-grid { grid-template-columns: 1fr; }
+            .model-steps { grid-template-columns: 1fr; }
+            .model-arrow { display: none; }
+            .comparison-header, .comparison-row { grid-template-columns: 1fr 1fr; }
+            .cr-aspect { display: none; }
+            .outcome-narrative { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-<nav>
-  <a href="#" class="nav-logo"><img src="ArkaX Logo-transparent.png" alt="ArkaX Logo" alt="ArkaX"></a>
-  <div class="nav-links">
- <a href="index.html#how-it-works">How it Works</a>
-    <a href="index.html#get-started">Pricing</a>
-    <a href="index.html#parents">Parents</a>
-    <a href="schools.html">Schools</a>
-    <a href="counselors.html">Counselors</a>
-    <a href="#">FAQs</a>
-  </div>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <a href="#" style="color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='#F6A623';this.style.color='#F6A623'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.6)'">Login</a>
-    <a href="#get-started" class="nav-cta">Get Started</a>
-  </div>
-</nav>
 
-<style>
-body { padding-top: 80px; }
-</style>
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:36px;width:auto;">
+        </a>
+        <div class="nav-right">
+            <a href="#how" class="nav-link">How it Works</a>
+            <a href="#outcomes" class="nav-link">Outcomes</a>
+            <a href="#demo" class="nav-cta">Book a Demo →</a>
+        </div>
+    </nav>
 
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-inner">
+            <div>
+                <div class="hero-eyebrow fade-up">
+                    <div class="hero-eyebrow-dot"></div>
+                    <span>For Career Counselors</span>
+                </div>
+                <h1 class="hero-headline fade-up delay-1">
+                    Guide More Students — With Structure<br><em>You Can Trust.</em>
+                </h1>
+                <p class="hero-subhead fade-up delay-2">
+                    ArkaX gives career counselors a <strong>clear, trackable framework</strong> that turns one-time advice into continuous guidance — without increasing your workload.
+                </p>
+                <div class="hero-cta-group fade-up delay-3">
+                    <a href="#demo" class="btn-primary">
+                        Book a Demo
+                        <span class="arrow">→</span>
+                    </a>
+                    <span class="hero-note">No commitment required</span>
+                </div>
+            </div>
+            <div class="hero-card fade-up delay-4">
+                <div class="hero-card-label">What counselors are managing today</div>
+                <ul class="hero-pain-list">
+                    <li class="hero-pain-item">
+                        <span class="pain-icon">📋</span>
+                        <span class="pain-text"><strong>Manual intake every session</strong>Starting from scratch each time a student sits down</span>
+                    </li>
+                    <li class="hero-pain-item">
+                        <span class="pain-icon">👨‍👩‍👧</span>
+                        <span class="pain-text"><strong>Parent conflicts surface late</strong>Family priorities discovered after decisions are made</span>
+                    </li>
+                    <li class="hero-pain-item">
+                        <span class="pain-icon">📊</span>
+                        <span class="pain-text"><strong>Impact is invisible</strong>No system to document or demonstrate measurable outcomes</span>
+                    </li>
+                    <li class="hero-pain-item">
+                        <span class="pain-icon">🔁</span>
+                        <span class="pain-text"><strong>Guidance ends at selection</strong>No structure to track alignment year over year</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
+    <!-- PROBLEM -->
+    <section class="section problem-section">
+        <div class="section-inner">
+            <div class="problem-grid">
+                <div class="problem-text">
+                    <div class="section-label">The Problem</div>
+                    <h2 class="section-title">You're Expected to Deliver Long-Term Outcomes — Without <em>Long-Term Structure.</em></h2>
+                    <p class="problem-body">
+                        You're asked to guide hundreds of students, align families, track academic progress, and demonstrate measurable results. But most counseling systems <strong>end at stream selection.</strong>
+                    </p>
+                    <p class="problem-body">
+                        It's wrong that counselors are expected to deliver lasting outcomes without the infrastructure to support them.
+                    </p>
+                    <div class="problem-callout">
+                        <span class="problem-callout-icon">💬</span>
+                        <span class="problem-callout-text">"You shouldn't have to manage that complexity alone."</span>
+                    </div>
+                </div>
+                <div class="problem-visual">
+                    <div class="problem-burden-item">
+                        <span class="pb-emoji">👥</span>
+                        <div class="pb-content">
+                            <h4>Hundreds of students to guide</h4>
+                            <p>With no standardized intake process</p>
+                        </div>
+                        <span class="pb-tag">No system</span>
+                    </div>
+                    <div class="problem-burden-item">
+                        <span class="pb-emoji">🏠</span>
+                        <div class="pb-content">
+                            <h4>Family alignment is manual</h4>
+                            <p>Parent priorities gathered case-by-case</p>
+                        </div>
+                        <span class="pb-tag">No structure</span>
+                    </div>
+                    <div class="problem-burden-item">
+                        <span class="pb-emoji">📅</span>
+                        <div class="pb-content">
+                            <h4>Year-over-year tracking</h4>
+                            <p>Progress lost between academic years</p>
+                        </div>
+                        <span class="pb-tag">No tracking</span>
+                    </div>
+                    <div class="problem-burden-item">
+                        <span class="pb-emoji">📈</span>
+                        <div class="pb-content">
+                            <h4>Proving your impact</h4>
+                            <p>Results undocumented. Value unclear to schools.</p>
+                        </div>
+                        <span class="pb-tag">No proof</span>
+                    </div>
+                    <div class="problem-burden-item">
+                        <span class="pb-emoji">🚨</span>
+                        <div class="pb-content">
+                            <h4>Risk alerts come too late</h4>
+                            <p>Drift caught only when it's already a crisis</p>
+                        </div>
+                        <span class="pb-tag">No early warning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- PAGE HERO -->
-<section class="page-hero" style="background:linear-gradient(170deg,#F5F3FF 0%,#fff 55%,#F0FDF4 100%)">
-  <div class="container">
-    <div class="page-eyebrow" style="background:var(--purple-light);border-color:rgba(124,58,237,0.25);color:#6d28d9"><i class="fas fa-chalkboard-teacher"></i> For Counselors</div>
-    <h1>Become an <em style="color:var(--purple)">ArkaX Ambassador</em>.<br>Focus on Guidance, Not Paperwork.</h1>
-    <p>Students come to you pre-assessed and ready for guidance. You spend your time on what you do best — helping them move forward with clarity.</p>
-  </div>
-</section>
+    <!-- WHAT'S MISSING -->
+    <section class="section missing-section">
+        <div class="section-inner">
+            <div class="missing-centered">
+                <div class="section-label" style="text-align:center;">What's Missing</div>
+                <h2 class="section-title">The issue isn't your expertise.</h2>
+                <p>
+                    You already bring professional judgment, emotional intelligence, and the ability to navigate difficult family conversations. <strong>What's missing is structure</strong> — a consistent way to standardize intake, integrate family priorities early, track alignment year by year, and document measurable progress.
+                </p>
+                <p style="margin-top:16px; font-size:16px; color: var(--slate-600);">
+                    Without that structure, even strong guidance loses momentum.
+                </p>
+            </div>
+            <div class="missing-pillars">
+                <div class="pillar">
+                    <div class="pillar-icon">📋</div>
+                    <h3>Standardized Intake</h3>
+                    <p>Every student arrives with structured assessment data — before they even sit down with you.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">👨‍👩‍👧</div>
+                    <h3>Family Priority Integration</h3>
+                    <p>Parent values captured early, built into recommendations — not discovered mid-conflict.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">📅</div>
+                    <h3>Year-by-Year Tracking</h3>
+                    <p>Milestone monitoring with early risk alerts, so you can course-correct before drift becomes failure.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">📊</div>
+                    <h3>Measurable Documentation</h3>
+                    <p>Progress clearly recorded — giving you the data to demonstrate exactly what your guidance is worth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- BENEFITS -->
-<section class="counselors-section">
-  <div class="container">
-    <div class="section-eyebrow" style="color:var(--purple);text-align:center">For Counselors</div>
-    <div class="section-title" style="text-align:center">Your Practice, Supercharged.</div>
-    <p class="counselors-body">Join ArkaX's counselor network. Students arrive prepared with structured assessment insights. You jump straight into meaningful guidance — no screening, no starting from scratch.</p>
+    <!-- HOW ARKAX SUPPORTS -->
+    <section class="section support-section" id="how">
+        <div class="section-inner support-inner">
+            <div class="support-header">
+                <div class="section-label">How ArkaX Supports Your Work</div>
+                <h2 class="section-title" style="color: var(--white);">Everything organized.<br><em style="color:var(--purple-light)">Before you begin.</em></h2>
+                <p>ArkaX provides the infrastructure — you provide the expertise that makes it matter.</p>
+            </div>
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="sc-icon">🧪</div>
+                    <div class="sc-title">Multi-Dimensional Assessments</div>
+                    <div class="sc-body">MBTI personality, Holland Code interests, aptitude across 5 dimensions, and academic interest mapping — all completed before your first session. Students arrive ready.</div>
+                </div>
+                <div class="support-card">
+                    <div class="sc-icon">🗺️</div>
+                    <div class="sc-title">Standardized 4-Year Guidance Journey</div>
+                    <div class="sc-body">A structured framework from stream selection through college admission. Every student follows the same rigorous path — with room for your professional interpretation.</div>
+                </div>
+                <div class="support-card">
+                    <div class="sc-icon">👨‍👩‍👧</div>
+                    <div class="sc-title">Built-In Parent Alignment</div>
+                    <div class="sc-body">Family priorities integrated into recommendations from the start. Dual scoring shows both student fit and family values — reducing conflict before it begins.</div>
+                </div>
+                <div class="support-card">
+                    <div class="sc-icon">📊</div>
+                    <div class="sc-title">Counselor Dashboard</div>
+                    <div class="sc-body">Cohort-level visibility, milestone tracking, and early risk alerts — all in one place. Your guidance is documented, measurable, and visible to the schools you serve.</div>
+                </div>
+            </div>
+            <div class="support-divider">
+                <span class="divider-icon">🎯</span>
+                <span class="support-divider-text">
+                    <em>You guide decisions. ArkaX organizes execution.</em><br>
+                    <span style="font-size:15px; font-weight:500; color: rgba(255,255,255,0.45);">Your professional judgment stays at the center. The platform handles everything else.</span>
+                </span>
+            </div>
+        </div>
+    </section>
 
-    <div style="max-width:280px;margin:0 auto 1.5rem">
-      <svg viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="280" height="100" rx="12" fill="#F3E8FF"/>
-        <circle cx="70" cy="35" r="14" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
-        <circle cx="70" cy="32" r="8" fill="#E8EEF4"/>
-        <path d="M62 28 Q62 22 70 20 Q78 22 78 28" fill="#2D3E50"/>
-        <rect x="60" y="50" width="20" height="22" rx="5" fill="#7c3aed"/>
-        <rect x="110" y="30" width="55" height="22" rx="6" fill="#fff" stroke="#7c3aed" stroke-width="1"/>
-        <text x="137" y="39" text-anchor="middle" font-size="5" fill="#9ca3af" font-family="Plus Jakarta Sans, sans-serif">Pre-assessed</text>
-        <text x="137" y="47" text-anchor="middle" font-size="5" fill="#7c3aed" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Student Profile</text>
-        <path d="M100 42 L108 42" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrowP)"/>
-        <defs><marker id="arrowP" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><path d="M0 0 L6 2.5 L0 5" fill="#7c3aed"/></marker></defs>
-        <rect x="185" y="18" width="75" height="20" rx="5" fill="#fff" stroke="#E5E7EB" stroke-width="0.75" opacity="0.5"/>
-        <rect x="182" y="25" width="75" height="20" rx="5" fill="#fff" stroke="#E5E7EB" stroke-width="0.75" opacity="0.7"/>
-        <rect x="179" y="32" width="75" height="20" rx="5" fill="#fff" stroke="#7c3aed" stroke-width="1"/>
-        <circle cx="190" cy="42" r="4" fill="#CCFBF1"/>
-        <rect x="198" y="39" width="25" height="3" rx="1.5" fill="#E5E7EB"/>
-        <rect x="198" y="44" width="18" height="2" rx="1" fill="#CCFBF1"/>
-        <circle cx="245" cy="42" r="5" fill="#0D9488" opacity="0.15"/>
-        <text x="245" y="44" text-anchor="middle" font-size="5" fill="#0D9488" font-weight="700">✓</text>
-        <rect x="179" y="58" width="75" height="20" rx="5" fill="#fff" stroke="#E5E7EB" stroke-width="1"/>
-        <circle cx="190" cy="68" r="4" fill="#F3E8FF"/>
-        <text x="190" y="70" text-anchor="middle" font-size="5" fill="#7c3aed">📊</text>
-        <text x="215" y="70" font-size="5.5" fill="#2D3E50" font-weight="600" font-family="Plus Jakarta Sans, sans-serif">Your Dashboard</text>
-        <text x="140" y="92" text-anchor="middle" font-size="6" fill="#9ca3af" font-family="Plus Jakarta Sans, sans-serif">Students arrive ready. You guide them forward.</text>
-      </svg>
-    </div>
+    <!-- WORKING MODEL -->
+    <section class="section model-section">
+        <div class="section-inner">
+            <div class="model-header">
+                <div class="section-label" style="text-align:center;">A Simple Working Model</div>
+                <h2 class="section-title" style="text-align:center;">Three steps.<br><em>Continuous guidance.</em></h2>
+            </div>
+            <div class="model-steps">
+                <div class="model-step">
+                    <div class="model-step-num">1</div>
+                    <div class="model-step-who">🎓 Student + Platform</div>
+                    <h3>Students complete structured assessments.</h3>
+                    <p>Everything is organized before they reach you. No intake forms. No guesswork. Personality, aptitude, interests, and family priorities — captured.</p>
+                </div>
+                <div class="model-arrow">→</div>
+                <div class="model-step">
+                    <div class="model-step-num">2</div>
+                    <div class="model-step-who">👤 You — The Counselor</div>
+                    <h3>You guide and validate decisions.</h3>
+                    <p>Interpret insights. Refine direction. Resolve family conflicts. Your expertise is applied where it creates the highest value — in the conversation, not the paperwork.</p>
+                </div>
+                <div class="model-arrow">→</div>
+                <div class="model-step">
+                    <div class="model-step-num">3</div>
+                    <div class="model-step-who">📊 Platform + You</div>
+                    <h3>The platform tracks progress over time.</h3>
+                    <p>Milestones monitored. Alignment reviewed quarterly. Course corrections made early — before drift becomes a crisis. Your impact stays visible throughout.</p>
+                </div>
+            </div>
+            <div class="model-footer-note">
+                <p>This transforms isolated sessions into <strong>continuous guidance</strong> — and turns your work into something measurable, scalable, and undeniably valuable.</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="counselor-benefits">
-      <div class="counselor-benefit"><div class="counselor-benefit-icon"><i class="fas fa-users"></i></div><div><h4>Structured Assessments</h4><p>Sign your students up on ArkaX. They complete the assessments — you get structured results, ready to guide.</p></div></div>
-      <div class="counselor-benefit"><div class="counselor-benefit-icon"><i class="fas fa-user-check"></i></div><div><h4>Focused Sessions</h4><p>Assessment data is done. You spend your time on guidance, not data collection.</p></div></div>
-      <div class="counselor-benefit"><div class="counselor-benefit-icon"><i class="fas fa-tools"></i></div><div><h4>Your Dashboard</h4><p>Student profiles, session notes, and progress tracking — all in one place.</p></div></div>
-    </div>
-    <div class="counselor-cta">
-      <a href="/cdn-cgi/l/email-protection#53303c3d2732302713322138322b7d323a" class="btn-counselor">Become an ArkaX Ambassador <i class="fas fa-arrow-right fa-xs"></i></a>
-      <div style="margin-top:.75rem;font-size:.82rem;color:var(--g500)"><i class="fas fa-envelope fa-xs" style="color:var(--purple);margin-right:.3rem"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eede1e0faefedfaceeffce5eff6a0efe7">[email&#160;protected]</a></div>
-    </div>
-  </div>
-</section>
+    <!-- OUTCOMES -->
+    <section class="section outcomes-section" id="outcomes">
+        <div class="section-inner">
+            <div class="outcomes-header">
+                <div class="section-label" style="text-align:center;">Two Outcomes Are Possible</div>
+                <h2 class="section-title" style="text-align:center;">The difference <em>structure makes.</em></h2>
+                <p>The path you take determines whether your guidance creates lasting impact — or quietly fades after stream selection.</p>
+            </div>
 
-<!-- WHY JOIN -->
-<section class="how-section">
-  <div class="container">
-    <div class="section-eyebrow" style="color:var(--purple)">Why Join</div>
-    <div class="section-title" style="text-align:center">The ArkaX Counselor Advantage</div>
-    <div class="steps">
-      <div class="step"><div class="step-num" style="background:#8b5cf6">1</div><div class="step-title">Students Come Prepared</div><div class="step-desc">Every student arrives with structured assessment insights — saving you hours of screening so you can focus on guidance from the start.</div></div>
-      <div class="step"><div class="step-num" style="background:var(--teal)">2</div><div class="step-title">Instant Student Profiles</div><div class="step-desc">Access structured profiles with career interests, strengths, and family priorities — all in one dashboard.</div></div>
-      <div class="step"><div class="step-num" style="background:var(--orange)">3</div><div class="step-title">Grow Your Practice</div><div class="step-desc">ArkaX connects you with students who are actively seeking guidance — expanding your reach effortlessly.</div></div>
-    </div>
-  </div>
-</section>
+            <div class="comparison-wrapper">
+                <div class="comparison-header">
+                    <div class="ch-blank"></div>
+                    <div class="ch-col bad">
+                        <div class="ch-icon">❌</div>
+                        <div class="ch-label">Without Structure</div>
+                    </div>
+                    <div class="ch-col good">
+                        <div class="ch-icon">✅</div>
+                        <div class="ch-label">With ArkaX</div>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="cr-aspect">Counseling lifecycle</div>
+                    <div class="cr-bad"><span class="cr-dot-bad"></span>Ends at stream selection</div>
+                    <div class="cr-good"><span class="cr-dot-good"></span>Continuous monitoring through admission</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="cr-aspect">Session preparation</div>
+                    <div class="cr-bad"><span class="cr-dot-bad"></span>Manual intake every session</div>
+                    <div class="cr-good"><span class="cr-dot-good"></span>Standardized, structured intake</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="cr-aspect">Parent involvement</div>
+                    <div class="cr-bad"><span class="cr-dot-bad"></span>Disputes surface late</div>
+                    <div class="cr-good"><span class="cr-dot-good"></span>Family priorities integrated early</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="cr-aspect">Your impact</div>
+                    <div class="cr-bad"><span class="cr-dot-bad"></span>Difficult to measure or document</div>
+                    <div class="cr-good"><span class="cr-dot-good"></span>Progress documented clearly</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="cr-aspect">Scale</div>
+                    <div class="cr-bad"><span class="cr-dot-bad"></span>Limited by manual bandwidth</div>
+                    <div class="cr-good"><span class="cr-dot-good"></span>Cohort-level visibility</div>
+                </div>
+            </div>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="schools.html">For Schools</a>
-      <a href="counselors.html">For Counselors</a>
-      <a href="/cdn-cgi/l/email-protection#12717d7c6673716652736079736a3c737b"><span class="__cf_email__" data-cfemail="13707c7d6772706753726178726b3d727a">[email&#160;protected]</span></a>
-    </div>    <div style="margin-top:.5rem;color:rgba(255,255,255,0.4)">© 2025 ArkaX. All rights reserved.</div>
-  </div>
-</footer>
-<script>
-  window.addEventListener('scroll', () => {
-    document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 10);
-  });
-</script>
+            <div class="outcome-narrative">
+                <div class="on-card without">
+                    <div class="on-label">Without Structure</div>
+                    <p class="on-text">Students drift quietly. Parents begin questioning decisions. Your impact stays undocumented. The work that matters most gets crowded out by coordination overhead.</p>
+                </div>
+                <div class="on-card with">
+                    <div class="on-label">With ArkaX</div>
+                    <p class="on-text">Students stay aligned. Parents trust the process. Schools see measurable clarity. And your guidance — finally — has the structure to show exactly what it's worth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" id="demo">
+        <div class="final-cta-inner">
+            <div class="section-label">Get Started</div>
+            <h2 class="final-headline">Bring Structure to<br>Your <em>Guidance.</em></h2>
+            <p class="final-sub">
+                Deliver career guidance that's finally measurable — without adding to your workload.
+            </p>
+            <div class="final-cta-buttons">
+                <a href="mailto:contact@arkax.ai" class="btn-primary" style="font-size:16px; padding: 18px 40px;">
+                    Book a Demo
+                    <span class="arrow">→</span>
+                </a>
+                <a href="mailto:contact@arkax.ai" class="btn-secondary">
+                    Ask a question
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="schools.html">For Schools</a>
+            <a href="counselors.html">For Counselors</a>
+            <a href="mailto:contact@arkax.ai">📧 contact@arkax.ai</a>
+            <a href="#">🌐 www.arkax.ai</a>
+        </div>
+        <span class="footer-copy">© 2025 ArkaX. All rights reserved.</span>
+    </footer>
+
 </body>
 </html>
