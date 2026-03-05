@@ -1,277 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>For Schools | ArkaX</title>
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>For Schools | ArkaX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script async defer src="https://use.fontawesome.com/releases/v6.5.2/js/all.js"></script>
   <style>
     :root {
-      --navy:#2D3E50;--navy-dark:#1C2A3A;--navy-light:#3D5468;
-      --orange:#E8A317;--orange-dark:#C48A0E;--orange-light:#FFF9EE;
-      --teal:#0D9488;--teal-dark:#0B7C72;--teal-light:#CCFBF1;
-      --red:#dc2626;--red-light:#fef2f2;
-      --purple:#7c3aed;--purple-light:#f3e8ff;
-      --g50:#f9fafb;--g100:#f3f4f6;--g200:#e5e7eb;--g400:#9ca3af;
-      --g500:#6b7280;--g600:#4b5563;--g700:#374151;
-      --white:#fff;
+      --navy:#2D3E50;
+      --navy-dark:#1C2A3A;
+      --navy-light:#3D5468;
+      --orange:#E8A317;
+      --orange-dark:#C48A0E;
+      --orange-light:#FFF9EE;
+      --orange-pale:#FEF3D0;
+      --teal:#0D9488;
+      --teal-dark:#0B7C72;
+      --teal-light:#CCFBF1;
+      --teal-pale:#F0FDF9;
+      --red:#dc2626;
+      --green:#16a34a;
+      --g50:#f9fafb;
+      --g100:#f3f4f6;
+      --g200:#e5e7eb;
+      --g300:#d1d5db;
+      --g400:#9ca3af;
+      --g500:#6b7280;
+      --g600:#4b5563;
+      --g700:#374151;
+      --white:#ffffff;
       --font:'Plus Jakarta Sans',sans-serif;
-      --max-w:1120px;--header-h:72px;
+      --max-w:1100px;
+      --header-h:72px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:var(--font);color:var(--navy-dark);line-height:1.6;background:var(--white);overflow-x:hidden}
+    body{font-family:var(--font);color:var(--navy-dark);background:var(--white);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
     img{max-width:100%;display:block}
-    a{color:var(--teal);text-decoration:none}
-    .container{max-width:var(--max-w);margin:0 auto;padding:0 1.25rem}
-    [x-cloak]{display:none!important}
+    a{text-decoration:none}
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem}
 
-    /* HEADER */
-    .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:#1C2A3A;border-bottom:1px solid rgba(255,255,255,0.08);transition:box-shadow 0.3s}
+    /* ── HEADER ── */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-h);background:var(--navy-dark);border-bottom:1px solid rgba(255,255,255,0.08);transition:box-shadow 0.3s}
     .site-header.scrolled{box-shadow:0 4px 24px rgba(0,0,0,0.4)}
-    .header-inner{width:100%;padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:100%;box-sizing:border-box}
-    .logo-link img{height:36px;width:auto;filter:none}
-    .nav-desktop{display:flex;align-items:center;gap:32px}
-    .nav-link{font-size:.875rem;font-weight:500;color:rgba(255,255,255,0.75);padding:.45rem .85rem;border-radius:6px;transition:all .2s;white-space:nowrap;text-decoration:none}
+    .header-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:100%}
+    .logo-text{font-size:1.35rem;font-weight:900;color:var(--white);letter-spacing:-0.4px}
+    .logo-text span{color:var(--orange)}
+    .nav-desktop{display:flex;align-items:center;gap:4px}
+    .nav-link{font-size:0.875rem;font-weight:500;color:rgba(255,255,255,0.7);padding:0.4rem 0.85rem;border-radius:6px;transition:all 0.2s}
     .nav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
     .nav-link.active{color:#fff;background:rgba(255,255,255,0.1)}
-    .nav-login{font-size:.875rem;font-weight:500;color:rgba(255,255,255,0.85);padding:.45rem 1rem;border-radius:6px;border:1px solid rgba(255,255,255,0.3);transition:all .2s;white-space:nowrap;text-decoration:none;margin-left:.5rem}
-    .nav-login:hover{color:#fff;border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.05)}
-    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;color:rgba(255,255,255,0.8);font-size:1.25rem}
-    .mobile-menu{position:fixed;top:var(--header-h);left:0;right:0;bottom:0;background:#1C2A3A;z-index:999;padding:1.5rem;display:flex;flex-direction:column;gap:.25rem;overflow-y:auto;border-top:1px solid rgba(255,255,255,0.08)}
-    .mobile-menu .nav-link{display:block;font-size:1rem;padding:.75rem 1rem;border-radius:8px;color:rgba(255,255,255,0.8)}
-    .mobile-menu .nav-login{display:block;font-size:1rem;padding:.75rem 1rem;border-radius:8px;border:1px solid rgba(255,255,255,0.25);text-align:center;margin:0;margin-top:.5rem;color:rgba(255,255,255,0.85)}
-    .mobile-menu .nav-cta {
-  background: #7C3AED !important;
-  color: #ffffff !important;
-  font-weight: 700;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 0.88rem;
-  text-decoration: none;
-}
+    .nav-cta{background:var(--teal);color:#fff!important;font-weight:700;font-size:0.875rem;padding:0.5rem 1.2rem;border-radius:6px;transition:all 0.2s;margin-left:0.5rem;display:inline-flex;align-items:center;gap:0.4rem}
+    .nav-cta:hover{background:var(--teal-dark);transform:translateY(-1px)}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.8);font-size:1.25rem;padding:0.5rem}
     @media(max-width:768px){.nav-desktop{display:none}.hamburger{display:block}}
-    .nav-cta{background:#0D9488;color:#fff!important;font-weight:700;padding:.5rem 1.2rem;border-radius:6px;font-size:.875rem;transition:all .2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;margin-left:.35rem}
-    .nav-cta:hover{background:#0B7C72;color:#fff!important;transform:translateY(-1px)}
 
-    /* PAGE HERO */
-    .page-hero{padding:calc(var(--header-h) + 4rem) 0 4rem;background:linear-gradient(170deg,#F4F7FA 0%,#fff 55%,#F0FDF4 100%);text-align:center;position:relative;overflow:hidden}
-    .page-hero::before{content:'';position:absolute;top:-150px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,0.07) 0%,transparent 70%);pointer-events:none}
-    .page-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal-light);border:1px solid rgba(13,148,136,0.25);padding:.4rem 1rem;border-radius:999px;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal-dark);margin-bottom:1.25rem}
-    .page-hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.15;color:var(--navy-dark);font-weight:800;margin-bottom:1rem;max-width:720px;margin-left:auto;margin-right:auto}
-    .page-hero h1 em{font-style:normal;color:var(--teal)}
-    .page-hero p{font-size:1.05rem;color:var(--g600);max-width:560px;margin:0 auto}
+    /* ── PHASE RIBBON ── */
+    .phase-ribbon{display:flex;height:3px}
+    .pr{flex:1}
+    .pr1{background:#6366f1}.pr2{background:#0ea5e9}.pr3{background:#f59e0b}.pr4{background:#14b8a6}.pr5{background:#22c55e}
 
-    /* SECTION SHARED */
-    .section-eyebrow{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:.75rem}
-    .section-title{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;color:var(--navy-dark);margin-bottom:1.25rem;font-weight:800}
-    .section-desc{font-size:1rem;color:var(--g600);max-width:600px;line-height:1.6}
+    /* ── HERO ── */
+    .hero{padding-top:var(--header-h);background:linear-gradient(160deg,#F4F7FA 0%,#fff 55%,var(--teal-pale) 100%);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-120px;right:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(13,148,136,0.07) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(232,163,23,0.05) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;padding:5rem 1.5rem 5.5rem;text-align:center}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal-light);border:1px solid rgba(13,148,136,0.25);color:var(--teal-dark);font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.4rem 1rem;border-radius:999px;margin-bottom:1.5rem;animation:fadeUp 0.5s ease both}
+    .hero h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.18;color:var(--navy-dark);margin-bottom:1.25rem;letter-spacing:-0.5px;animation:fadeUp 0.5s ease 0.1s both}
+    .hero h1 em{font-style:normal;color:var(--teal)}
+    .hero-sub{font-size:1.05rem;font-weight:500;color:var(--g600);line-height:1.7;max-width:580px;margin:0 auto 1.5rem;animation:fadeUp 0.5s ease 0.2s both}
+    .hero-proof{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--g600);margin-bottom:2rem;animation:fadeUp 0.5s ease 0.3s both}
+    .proof-check{color:var(--teal);font-weight:800;font-size:1rem}
+    .hero-cta-group{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.5s ease 0.4s both}
+    .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal);color:#fff;font-size:1rem;font-weight:700;padding:0.85rem 1.75rem;border-radius:10px;transition:all 0.2s;box-shadow:0 6px 20px rgba(13,148,136,0.25)}
+    .btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 10px 24px rgba(13,148,136,0.35)}
+    .btn-outline{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--navy);font-size:0.95rem;font-weight:600;padding:0.85rem 1.5rem;border-radius:10px;border:1.5px solid var(--g300);transition:all 0.2s}
+    .btn-outline:hover{border-color:var(--teal);color:var(--teal)}
 
-    /* SCHOOLS */
-    .schools-section{padding:5rem 0;background:var(--g50)}
-    .school-advantages{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:860px;margin:2.5rem auto 2rem}
-    .school-adv-card{background:var(--white);border-radius:16px;padding:1.75rem;border:1px solid var(--g200);transition:all .3s;position:relative;overflow:hidden;border-left:4px solid transparent}
-    .school-adv-card:nth-child(1){border-left-color:var(--orange);background:linear-gradient(135deg,#FFF9EE 0%,#fff 40%)}
-    .school-adv-card:nth-child(2){border-left-color:var(--teal);background:linear-gradient(135deg,#F0FDF4 0%,#fff 40%)}
-    .school-adv-card:nth-child(3){border-left-color:#D97706;background:linear-gradient(135deg,#FFFBEB 0%,#fff 40%)}
-    .school-adv-card:nth-child(4){border-left-color:var(--navy);background:linear-gradient(135deg,#E8EEF4 0%,#fff 40%)}
-    .school-adv-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-    .school-adv-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;pointer-events:none;opacity:0.06}
-    .school-adv-card:nth-child(1)::after{background:var(--orange)}
-    .school-adv-card:nth-child(2)::after{background:var(--teal)}
-    .school-adv-card:nth-child(3)::after{background:#D97706}
-    .school-adv-card:nth-child(4)::after{background:var(--navy)}
-    .school-adv-icon{width:3rem;height:3rem;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:1rem;transition:transform .3s}
-    .school-adv-card:hover .school-adv-icon{transform:scale(1.15) rotate(-5deg)}
-    .school-adv-card:nth-child(1) .school-adv-icon{background:var(--orange);color:var(--white)}
-    .school-adv-card:nth-child(2) .school-adv-icon{background:var(--teal);color:var(--white)}
-    .school-adv-card:nth-child(3) .school-adv-icon{background:#D97706;color:var(--white)}
-    .school-adv-card:nth-child(4) .school-adv-icon{background:var(--navy);color:var(--white)}
-    .school-adv-card h4{font-weight:700;font-size:1rem;color:var(--navy-dark);margin-bottom:.4rem}
-    .school-adv-card p{font-size:.88rem;color:var(--g600);line-height:1.5}
-    .school-tagline{text-align:center;font-style:italic;font-size:.95rem;color:var(--orange-dark);margin-bottom:2rem}
-    .school-cta{text-align:center}
-    .btn-demo{background:var(--teal);color:var(--white)!important;font-weight:600;padding:.8rem 2rem;border-radius:12px;font-size:1rem;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;position:relative;overflow:hidden}
-    .btn-demo:hover{background:var(--teal-dark);transform:translateY(-2px);color:var(--white)!important}
+    /* ── TRUST BAR ── */
+    .trust-bar{background:var(--orange-pale);border-top:1px solid #fde9b0;border-bottom:1px solid #fde9b0;padding:0.9rem 1.5rem}
+    .trust-bar-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+    .trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;font-weight:700;color:var(--g700)}
+    .trust-dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
 
-    /* COUNSELORS */
-    .counselors-section{padding:5rem 0;background:var(--white)}
-    .counselors-body{text-align:center;font-size:1rem;color:var(--g600);max-width:560px;margin:-.5rem auto 2rem;line-height:1.6}
-    .counselor-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:780px;margin:0 auto 2rem}
-    .counselor-benefit{display:flex;gap:1rem;align-items:flex-start;background:var(--white);border-radius:16px;padding:1.5rem;border:1px solid var(--g200);transition:all .3s;position:relative;overflow:hidden;border-top:3px solid transparent}
-    .counselor-benefit:nth-child(1){border-top-color:#8b5cf6;background:linear-gradient(180deg,#F5F3FF 0%,#fff 30%)}
-    .counselor-benefit:nth-child(2){border-top-color:#0D9488;background:linear-gradient(180deg,#F0FDF4 0%,#fff 30%)}
-    .counselor-benefit:nth-child(3){border-top-color:var(--orange);background:linear-gradient(180deg,#FFF9EE 0%,#fff 30%)}
-    .counselor-benefit:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-    .counselor-benefit-icon{width:2.75rem;height:2.75rem;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.05rem;transition:transform .3s}
-    .counselor-benefit:hover .counselor-benefit-icon{transform:scale(1.15) rotate(-5deg)}
-    .counselor-benefit:nth-child(1) .counselor-benefit-icon{background:#8b5cf6;color:var(--white)}
-    .counselor-benefit:nth-child(2) .counselor-benefit-icon{background:#0D9488;color:var(--white)}
-    .counselor-benefit:nth-child(3) .counselor-benefit-icon{background:var(--orange);color:var(--white)}
-    .counselor-benefit h4{font-weight:700;font-size:.95rem;color:var(--navy-dark);margin-bottom:.3rem}
-    .counselor-benefit p{font-size:.85rem;color:var(--g600);line-height:1.5}
-    .counselor-cta{text-align:center}
-    .btn-counselor{background:var(--purple);color:var(--white)!important;font-weight:600;padding:.8rem 2rem;border-radius:12px;font-size:1rem;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
-    .btn-counselor:hover{background:#6d28d9;transform:translateY(-2px);color:var(--white)!important}
+    /* ── SHARED ── */
+    .section-eyebrow{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:0.75rem}
+    .section-title{font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;line-height:1.2;color:var(--navy-dark);margin-bottom:1rem;letter-spacing:-0.3px}
+    .section-divider{width:44px;height:3px;background:var(--teal);border-radius:2px;margin-bottom:1.75rem}
+    .section-divider.orange{background:var(--orange)}
 
-    /* HOW IT WORKS */
-    .how-section{padding:5rem 0;background:#F4F7FA}
-    .how-section .section-title,.how-section .section-eyebrow{text-align:center}
-    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2.5rem}
-    .step{background:var(--white);border-radius:16px;padding:2rem 1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04);border:1px solid var(--g200);transition:all .3s}
-    .step:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
-    .step-num{width:3rem;height:3rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;margin:0 auto 1.25rem}
-    .step:nth-child(1) .step-num{background:var(--navy);color:var(--white)}
-    .step:nth-child(2) .step-num{background:var(--orange);color:var(--white)}
-    .step:nth-child(3) .step-num{background:var(--teal);color:var(--white)}
-    .step-title{font-weight:700;font-size:1.05rem;color:var(--navy-dark);margin-bottom:.5rem}
-    .step-desc{font-size:.9rem;color:var(--g600);line-height:1.5}
+    /* ── PROBLEM ── */
+    .problem-section{padding:5rem 0;background:var(--g50);border-top:1px solid var(--g200);border-bottom:1px solid var(--g200)}
+    .problem-wrap{max-width:700px;margin:0 auto;padding:0 1.5rem}
+    .problem-body p{font-size:1rem;font-weight:500;color:var(--g600);line-height:1.85;margin-bottom:1.25rem}
+    .problem-body p:last-child{margin-bottom:0}
+    .problem-body strong{color:var(--navy-dark);font-weight:700}
+    .problem-close{margin-top:1.75rem;background:var(--white);border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+    .problem-close p{font-size:1rem;font-weight:700;font-style:italic;color:var(--navy-dark);line-height:1.6;margin:0}
 
-    /* FOOTER */
-    .footer{background:var(--navy-dark);color:rgba(255,255,255,0.7);padding:2rem 0;text-align:center;font-size:.875rem}
-    .footer a{color:rgba(255,255,255,0.5);transition:color .2s}
-    .footer a:hover{color:var(--white)}
-    .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.75rem;flex-wrap:wrap}
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 60px;
-    background: rgba(30,41,59,0.97);
-    backdrop-filter: blur(12px);
-  }
-  .nav-logo img { height: 38px; display: block; }
-  .nav-links { display: flex; align-items: center; gap: 32px; margin-left: 80px; }
-  .nav-links a {
-    color: rgba(255,255,255,0.6); font-size: 0.88rem; font-weight: 500;
-    text-decoration: none; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-cta {
-  background: #0D9488;
-  color: #ffffff;
-    background: var(--teal); color: #ffffff; font-weight: 700;
-    padding: 10px 22px; border-radius: 6px; font-size: 0.88rem;
-    text-decoration: none; transition: background 0.2s; white-space: nowrap;
-  }
-  .nav-cta:hover { background: var(--teal-dark); }
+    /* ── WHAT'S MISSING ── */
+    .missing-section{padding:5rem 0;background:var(--white)}
+    .missing-wrap{max-width:700px;margin:0 auto;padding:0 1.5rem}
+    .missing-wrap p{font-size:1rem;font-weight:500;color:var(--g600);line-height:1.85;margin-bottom:1.25rem}
+    .missing-wrap p:last-child{margin-bottom:0}
+    .missing-wrap strong{color:var(--navy-dark);font-weight:700}
 
-  /* ─── SCROLL TO TOP ─── */
-</style>
+    /* ── HOW IT WORKS ── */
+    .how-section{padding:5rem 0;background:var(--navy-dark);position:relative;overflow:hidden}
+    .how-section::before{content:'';position:absolute;top:0;right:0;bottom:0;width:40%;background:radial-gradient(circle at 80% 50%,rgba(13,148,136,0.08) 0%,transparent 60%);pointer-events:none}
+    .how-section .section-eyebrow{color:var(--teal-light)}
+    .how-section .section-title{color:var(--white)}
+    .how-section .section-divider{background:var(--teal)}
+    .how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2rem}
+    .how-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.75rem;transition:border-color 0.2s,background 0.2s}
+    .how-card:hover{border-color:rgba(13,148,136,0.35);background:rgba(255,255,255,0.06)}
+    .how-card-icon{width:40px;height:40px;background:rgba(13,148,136,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--teal-light);margin-bottom:1rem}
+    .how-card h4{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+    .how-card p{font-size:0.875rem;font-weight:500;color:rgba(255,255,255,0.55);line-height:1.6}
+    .how-reassurance{background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.25);border-radius:10px;padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1rem}
+    .how-reassurance i{color:var(--teal-light);font-size:1.1rem;flex-shrink:0}
+    .how-reassurance p{font-size:0.9rem;font-weight:600;color:var(--teal-light);margin:0}
+
+    /* ── WORKING MODEL ── */
+    .model-section{padding:5rem 0;background:var(--g50);border-top:1px solid var(--g200)}
+    .model-wrap{max-width:700px;margin:0 auto;padding:0 1.5rem}
+    .model-steps{display:flex;flex-direction:column;position:relative}
+    .model-steps::before{content:'';position:absolute;left:20px;top:50px;bottom:50px;width:2px;background:linear-gradient(to bottom,var(--teal),rgba(13,148,136,0.1))}
+    .model-step{display:flex;gap:1.5rem;align-items:flex-start;padding:1.75rem 0;border-bottom:1px solid var(--g200)}
+    .model-step:last-child{border-bottom:none}
+    .step-num{width:42px;height:42px;flex-shrink:0;background:var(--teal);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;position:relative;z-index:1;box-shadow:0 0 0 4px var(--g50),0 0 0 6px rgba(13,148,136,0.2)}
+    .step-content h4{font-size:1rem;font-weight:800;color:var(--navy-dark);margin-bottom:0.35rem}
+    .step-content p{font-size:0.9rem;font-weight:500;color:var(--g600);line-height:1.65}
+
+    /* ── GRADE TABLE ── */
+    .grade-section{padding:5rem 0;background:var(--white)}
+    .grade-table-wrap{max-width:700px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07)}
+    .grade-table{width:100%;border-collapse:collapse}
+    .grade-table thead tr{background:var(--navy-dark)}
+    .grade-table thead th{padding:1rem 1.25rem;text-align:left;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+    .grade-table tbody tr{background:var(--white);border-bottom:1px solid var(--g100);transition:background 0.15s}
+    .grade-table tbody tr:last-child{border-bottom:none}
+    .grade-table tbody tr:hover{background:var(--teal-pale)}
+    .grade-table tbody td{padding:1.1rem 1.25rem;font-size:0.925rem;color:var(--g600)}
+    .grade-table tbody td:first-child{font-weight:800;color:var(--navy-dark);white-space:nowrap}
+    .grade-badge{display:inline-flex;align-items:center;background:var(--teal-light);border:1px solid rgba(13,148,136,0.2);color:var(--teal-dark);font-size:0.78rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:999px}
+    .grade-footnote{max-width:700px;margin:1.5rem auto 0;padding:0 1.5rem;font-size:0.9rem;font-weight:500;color:var(--g500);line-height:1.7;font-style:italic}
+
+    /* ── TWO OUTCOMES ── */
+    .outcomes-section{padding:5rem 0;background:var(--g50);border-top:1px solid var(--g200)}
+    .outcomes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+    .outcome-card{border-radius:14px;padding:1.75rem}
+    .outcome-card.without{background:#fef9f9;border:1.5px solid #fecaca}
+    .outcome-card.with{background:#f0fdf4;border:1.5px solid #bbf7d0}
+    .outcome-label{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem}
+    .outcome-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.875rem}
+    .outcome-card.without .outcome-icon{background:#fee2e2;color:var(--red)}
+    .outcome-card.with .outcome-icon{background:#dcfce7;color:var(--green)}
+    .outcome-label h4{font-size:0.9rem;font-weight:800}
+    .outcome-card.without .outcome-label h4{color:#991b1b}
+    .outcome-card.with .outcome-label h4{color:#166534}
+    .outcome-card p{font-size:0.9rem;font-weight:500;line-height:1.75}
+    .outcome-card.without p{color:#7f1d1d}
+    .outcome-card.with p{color:#14532d}
+    .compare-wrap{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07)}
+    .compare-table{width:100%;border-collapse:collapse}
+    .compare-table thead tr{background:var(--navy-dark)}
+    .compare-table thead th{padding:0.85rem 1.25rem;text-align:left;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+    .compare-table thead th:first-child{color:#f87171}
+    .compare-table thead th:last-child{color:#4ade80}
+    .compare-table tbody tr{background:var(--white);border-bottom:1px solid var(--g100);transition:background 0.15s}
+    .compare-table tbody tr:last-child{border-bottom:none}
+    .compare-table tbody tr:hover{background:var(--g50)}
+    .compare-table tbody td{padding:0.9rem 1.25rem;font-size:0.9rem;font-weight:500}
+    .compare-table tbody td:first-child{color:var(--g600);border-right:1px solid var(--g100)}
+    .compare-table tbody td:last-child{color:var(--navy-dark);font-weight:700}
+    .neg{color:#dc2626!important}
+    .pos{color:#16a34a!important}
+
+    /* ── FUTURE READY ── */
+    .future-section{padding:3.5rem 0;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%);position:relative;overflow:hidden}
+    .future-section::after{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(232,163,23,0.06) 0%,transparent 70%)}
+    .future-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;position:relative;z-index:1}
+    .future-badge{width:72px;height:72px;background:rgba(13,148,136,0.12);border:2px solid rgba(13,148,136,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+    .future-eyebrow{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal-light);margin-bottom:0.4rem}
+    .future-title{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:0.6rem}
+    .future-desc{font-size:0.9rem;font-weight:500;color:rgba(255,255,255,0.55);line-height:1.7}
+
+    /* ── CTA ── */
+    .cta-section{padding:5rem 0;background:var(--white);text-align:center;border-top:1px solid var(--g200)}
+    .cta-inner{max-width:640px;margin:0 auto;padding:0 1.5rem}
+    .cta-sub{font-size:1rem;font-weight:500;color:var(--g600);margin-bottom:2.5rem;line-height:1.7}
+    .cta-pills{display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-top:1.75rem}
+    .cta-pill{display:flex;align-items:center;gap:0.4rem;background:var(--g50);border:1px solid var(--g200);border-radius:999px;padding:0.45rem 1rem;font-size:0.8rem;font-weight:600;color:var(--g600)}
+    .cta-pill i{color:var(--teal);font-size:0.75rem}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--navy-dark);padding:1.5rem 0;border-top:1px solid rgba(255,255,255,0.06)}
+    .footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-size:1.15rem;font-weight:900;color:#fff}
+    .footer-logo span{color:var(--orange)}
+    .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .footer-links a{font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.5);transition:color 0.2s}
+    .footer-links a:hover{color:var(--teal-light)}
+    .footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.3)}
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .fade-in{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      .hero-inner{padding:3.5rem 1.25rem 4rem}
+      .hero h1{font-size:1.75rem}
+      .how-grid{grid-template-columns:1fr}
+      .outcomes-grid{grid-template-columns:1fr}
+      .future-inner{grid-template-columns:1fr;gap:1.25rem}
+      .future-badge{width:56px;height:56px;font-size:1.5rem}
+      .trust-bar-inner{gap:1rem}
+      .footer-inner{flex-direction:column;text-align:center}
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a href="#" class="nav-logo"><img src="ArkaX Logo-transparent.png" alt="ArkaX Logo" alt="ArkaX"></a>
-  <div class="nav-links">
-    <a href="index.html#how-it-works">How it Works</a>
-    <a href="index.html#get-started">Pricing</a>
-    <a href="index.html#parents">Parents</a>
-    
-    <a href="schools.html">Schools</a>
-    <a href="counselors.html">Counselors</a>
-    <a href="#">FAQs</a>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-text">Arka<span>X</span></a>
+    <nav class="nav-desktop">
+      <a href="#how-it-works" class="nav-link">How It Works</a>
+      <a href="#get-started" class="nav-cta">Book a Demo <i class="fas fa-arrow-right fa-xs"></i></a>
+    </nav>
+    <button class="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
   </div>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <a href="#" style="color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='#F6A623';this.style.color='#F6A623'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.6)'">Login</a>
-    <a href="#get-started" class="nav-cta">Get Started</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><i class="fas fa-school"></i> For Schools · Grades 9–12</div>
+    <h1>Be the Future Ready School With a Real Answer.<br><em>An Actual Career Guidance System —<br>Not a One-Time Report.</em></h1>
+    <p class="hero-sub">ArkaX gives every student structured direction from Grade 9 to 12 — without adding to your workload.</p>
+    <div class="hero-proof">
+      <span class="proof-check">✓</span>
+      <span>Pilot completed · Panineeya Mahavidyalaya Public School, Hyderabad</span>
+    </div>
+    <div class="hero-cta-group">
+      <a href="#get-started" class="btn-primary">Bring ArkaX to Your School <i class="fas fa-arrow-right fa-xs"></i></a>
+      <a href="#how-it-works" class="btn-outline">See How It Works <i class="fas fa-chevron-down fa-xs"></i></a>
+    </div>
   </div>
-</nav>
-
-<style>
-body { padding-top: 80px; }
-</style>
-
-
-
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="container">
-    <div class="page-eyebrow"><i class="fas fa-school"></i> For Schools</div>
-    <h1>Give Every Student <em>Career Clarity</em> — Without Adding to Your Teachers' Workload</h1>
-    <p>ArkaX integrates into your school seamlessly. Students self-navigate, parents stay aligned, and your school stands out as one that truly invests in every student's future.</p>
+  <div class="phase-ribbon">
+    <div class="pr pr1"></div><div class="pr pr2"></div>
+    <div class="pr pr3"></div><div class="pr pr4"></div><div class="pr pr5"></div>
   </div>
 </section>
 
-<!-- ADVANTAGES -->
-<section class="schools-section">
-  <div class="container">
-    <div class="section-eyebrow" style="color:var(--teal);text-align:center">What Schools Get with ArkaX</div>
-    <div class="section-title" style="text-align:center">Built Around How Schools Actually Work</div>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-dot"></div>Under 1 hour to onboard</div>
+    <div class="trust-item"><div class="trust-dot"></div>No IT setup required</div>
+    <div class="trust-item"><div class="trust-dot"></div>Zero burden on teachers</div>
+    <div class="trust-item"><div class="trust-dot"></div>Pilot · Panineeya Mahavidyalaya, Hyderabad</div>
+    <div class="trust-item"><div class="trust-dot"></div>Future-ready · NEP 2020 aligned</div>
+  </div>
+</div>
 
-    <div style="max-width:280px;margin:0 auto 1.5rem">
-      <svg viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="280" height="100" rx="12" fill="#F0FDF4"/>
-        <rect x="90" y="30" width="100" height="55" rx="4" fill="#fff" stroke="#2D3E50" stroke-width="1.5"/>
-        <polygon points="140,12 80,35 200,35" fill="#2D3E50"/>
-        <rect x="100" y="42" width="14" height="14" rx="2" fill="#CCFBF1" stroke="#0D9488" stroke-width="1"/>
-        <rect x="122" y="42" width="14" height="14" rx="2" fill="#CCFBF1" stroke="#0D9488" stroke-width="1"/>
-        <rect x="144" y="42" width="14" height="14" rx="2" fill="#CCFBF1" stroke="#0D9488" stroke-width="1"/>
-        <rect x="166" y="42" width="14" height="14" rx="2" fill="#CCFBF1" stroke="#0D9488" stroke-width="1"/>
-        <rect x="130" y="62" width="20" height="23" rx="3" fill="#E8A317"/>
-        <line x1="140" y1="12" x2="140" y2="2" stroke="#2D3E50" stroke-width="1.5"/>
-        <rect x="140" y="2" width="12" height="7" rx="1" fill="#0D9488"/>
-        <circle cx="50" cy="68" r="6" fill="#E8EEF4" stroke="#2D3E50" stroke-width="1"/>
-        <rect x="46" y="75" width="8" height="10" rx="2" fill="#0D9488"/>
-        <circle cx="65" cy="72" r="5" fill="#E8EEF4" stroke="#2D3E50" stroke-width="1"/>
-        <rect x="62" y="78" width="6" height="8" rx="2" fill="#E8A317"/>
-        <rect x="105" y="60" width="18" height="8" rx="4" fill="#0D9488"/>
-        <text x="114" y="66" text-anchor="middle" font-size="4" fill="#fff" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">ArkaX</text>
-        <rect x="215" y="25" width="50" height="40" rx="5" fill="#fff" stroke="#0D9488" stroke-width="1"/>
-        <rect x="220" y="32" width="20" height="3" rx="1.5" fill="#CCFBF1"/>
-        <rect x="220" y="38" width="15" height="3" rx="1.5" fill="#CCFBF1"/>
-        <rect x="220" y="44" width="40" height="3" rx="1.5" fill="#E5E7EB"/>
-        <rect x="220" y="44" width="28" height="3" rx="1.5" fill="#0D9488"/>
-        <rect x="220" y="50" width="40" height="3" rx="1.5" fill="#E5E7EB"/>
-        <rect x="220" y="50" width="35" height="3" rx="1.5" fill="#E8A317"/>
-        <text x="240" y="73" text-anchor="middle" font-size="5" fill="#9ca3af" font-family="Plus Jakarta Sans, sans-serif">School Dashboard</text>
-      </svg>
-    </div>
-
-    <div class="school-advantages">
-      <div class="school-adv-card"><div class="school-adv-icon"><i class="fas fa-crosshairs"></i></div><h4>Future-Ready Guidance</h4><p>Structured career guidance for every student — without adding to your teachers' workload</p></div>
-      <div class="school-adv-card"><div class="school-adv-icon"><i class="fas fa-heart"></i></div><h4>Parent Trust</h4><p>Parents see the same roadmap you do — alignment before the questions start</p></div>
-      <div class="school-adv-card"><div class="school-adv-icon"><i class="fas fa-bolt"></i></div><h4>Zero Burden</h4><p>Under 1-hour training. Students self-navigate. No extra work for teachers</p></div>
-      <div class="school-adv-card"><div class="school-adv-icon"><i class="fas fa-chart-bar"></i></div><h4>Pre-Assessed Students</h4><p>Students arrive with assessment data — your counselors focus on guidance, not screening</p></div>
-    </div>
-    <div class="school-tagline">"No burden on teachers. ArkaX does the work."</div>
-    <div class="school-cta">
-      <a href="/cdn-cgi/l/email-protection#c2a1adacb6a3a1b682a3b0a9a3baeca3ab" class="btn-demo">Bring ArkaX to Your School <i class="fas fa-arrow-right fa-xs"></i></a>
-      <div style="margin-top:.75rem;font-size:.82rem;color:var(--g500)"><i class="fas fa-envelope fa-xs" style="color:var(--navy);margin-right:.3rem"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d0dcddc7d2d0c7f3d2c1d8d2cb9dd2da">[email&#160;protected]</a></div>
+<!-- TESTIMONIAL -->
+<section style="padding:3.5rem 0;background:var(--navy-dark);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:780px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;" class="fade-in">
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+      <div style="font-size:5rem;line-height:1;color:var(--teal);opacity:0.4;font-family:Georgia,serif;margin-top:-0.5rem;">"</div>
+      <div>
+        <p style="font-size:1.15rem;font-weight:600;color:#fff;line-height:1.75;margin-bottom:1.5rem;font-style:italic;">As a principal, I've seen so many bright students pick the wrong stream — simply because they had no proper guidance. We did a pilot with ArkaX at our school and it really worked. Students take scientific assessments, discover their strengths, and families decide together with clarity. I truly recommend ArkaX to every student, every school, and every counselor — for the bright future of our children.</p>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(13,148,136,0.2);border:2px solid rgba(13,148,136,0.35);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--teal-light);font-weight:800;">D</div>
+          <div>
+            <div style="font-size:0.95rem;font-weight:800;color:#fff;">Dandi Vasudha Rani</div>
+            <div style="font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.5);">Principal, Panineeya Mahavidyalaya Public School, Hyderabad</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS FOR SCHOOLS -->
-<section class="how-section">
-  <div class="container">
-    <div class="section-eyebrow">Simple Onboarding</div>
-    <div class="section-title">Up & Running in 3 Steps</div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-title">Sign Up Your School</div><div class="step-desc">We onboard your school in under a day. No IT setup, no complex integration.</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-title">Students Self-Navigate</div><div class="step-desc">Students complete assessments independently. Results go to parents and counselors automatically.</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-title">Track Progress</div><div class="step-desc">Your school dashboard shows every student's journey — stream choice, roadmap, milestones.</div></div>
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="problem-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow">The Problem</div>
+      <h2 class="section-title">Career Guidance Is the New Expectation. Most Schools Have Bits of It — Not All of It.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="problem-body fade-in">
+      <p>A one-time assessment. A counselor session or two. An annual career talk. It exists — but it's spotty. No one is tracking whether it's working. Students drift between touchpoints. Parents have no visibility. And the gaps don't show up until it's too late to course correct.</p>
+      <p>Schools want to shape futures, not just deliver marks. But without a system, guidance doesn't scale — it stays informal, doesn't compound, and students graduate with the same gaps every year.</p>
+      <div class="problem-close">
+        <p>The cost isn't always a wrong choice. Sometimes it's four years of the right child moving in the wrong direction — quietly, without anyone noticing.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- WHAT'S MISSING -->
+<section class="missing-section">
+  <div class="missing-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow">What's Missing</div>
+      <h2 class="section-title">The Issue Isn't Commitment.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="fade-in">
+      <p>Your teachers care. Your counselors try. But <strong>guidance without a system is advice without continuity</strong> — it doesn't follow the student, it doesn't involve the parent, and it leaves no record of progress.</p>
+      <p>What's missing is structure — a consistent way to guide students year by year, involve parents throughout, and document progress that actually compounds.</p>
+      <p>Without that, even the best schools find it hard to show what their guidance is actually delivering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="fade-in" style="max-width:640px;margin-bottom:2rem;">
+      <div class="section-eyebrow">How ArkaX Works in Your School</div>
+      <h2 class="section-title">One System. Every Student. Every Grade.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="how-grid fade-in">
+      <div class="how-card">
+        <div class="how-card-icon"><i class="fas fa-chart-bar"></i></div>
+        <h4>Your School Gets a Dashboard</h4>
+        <p>Progress across every grade, every cohort, every year. Spot trends. Identify students who need support early — before gaps become visible problems.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-card-icon"><i class="fas fa-bolt"></i></div>
+        <h4>Runs with Minimal Effort</h4>
+        <p>Students can join at any stage. Platform adapts to their grade. Under one hour to onboard — no IT setup, no complex integration, no training required.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-card-icon"><i class="fas fa-compass"></i></div>
+        <h4>Counselors Get a System</h4>
+        <p>Instead of scattered sessions, counselors work from structured profiles. Students arrive pre-assessed and ready to be guided — not screened.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-card-icon"><i class="fas fa-users"></i></div>
+        <h4>Parents Get Real-Time Visibility</h4>
+        <p>Parents see the same roadmap as counselors. Alignment before the questions start — not after they've already escalated to management.</p>
+      </div>
+    </div>
+    <div class="how-reassurance fade-in">
+      <i class="fas fa-handshake"></i>
+      <p>ArkaX does not replace your counselor. It gives them a system to work with.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING MODEL -->
+<section class="model-section">
+  <div class="model-wrap">
+    <div class="fade-in">
+      <div class="section-eyebrow">A Simple Working Model</div>
+      <h2 class="section-title">Three Steps to Get Started.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="model-steps fade-in">
+      <div class="model-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Start with any grade between 9 and 12.</h4>
+          <p>Begin with one cohort and expand over time at your own pace. No large rollout required. No commitment beyond one cohort to start.</p>
+        </div>
+      </div>
+      <div class="model-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Students self-navigate structured roadmaps.</h4>
+          <p>Each student explores interests, strengths, and future possibilities independently. No hand-holding required from your staff. Results go directly to parents and counselors.</p>
+        </div>
+      </div>
+      <div class="model-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Your school gets a dashboard of every student's progress and pitfalls.</h4>
+          <p>See where students are thriving and where they're drifting — so your counselors and teachers can step in at the right moment, from your end, before small gaps become bigger ones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADE TABLE -->
+<section class="grade-section">
+  <div class="container">
+    <div class="fade-in" style="max-width:700px;margin-bottom:2rem;">
+      <div class="section-eyebrow">The Grade-by-Grade Journey</div>
+      <h2 class="section-title">A Clear Path for Every Year.</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="grade-table-wrap fade-in">
+      <table class="grade-table">
+        <thead><tr><th>Grade</th><th>Student Focus</th></tr></thead>
+        <tbody>
+          <tr><td><span class="grade-badge">Grade 9</span></td><td>Explore interests, strengths, and emerging career possibilities</td></tr>
+          <tr><td><span class="grade-badge">Grade 10</span></td><td>Gain clarity on subjects and make informed stream decisions</td></tr>
+          <tr><td><span class="grade-badge">Grade 11</span></td><td>Strengthen alignment with chosen path and build relevant skills</td></tr>
+          <tr><td><span class="grade-badge">Grade 12</span></td><td>Move confidently toward higher education and future careers</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="grade-footnote fade-in">Students who start in Grade 9 arrive at Grade 12 with four years of structured direction behind them. Students who join later catch up quickly — the system meets them where they are.</p>
+  </div>
+</section>
+
+<!-- TWO OUTCOMES -->
+<section class="outcomes-section">
+  <div class="container">
+    <div class="fade-in" style="max-width:640px;margin-bottom:2rem;">
+      <div class="section-eyebrow">Two Outcomes Are Possible</div>
+      <h2 class="section-title">The Path Splits Here.</h2>
+      <div class="section-divider orange"></div>
+    </div>
+    <div class="outcomes-grid fade-in">
+      <div class="outcome-card without">
+        <div class="outcome-label">
+          <div class="outcome-icon"><i class="fas fa-times"></i></div>
+          <h4>Without a System</h4>
+        </div>
+        <p>Guidance stays spotty. Students drift. Parents stay in the dark. The wrong choices happen visibly — and the missed opportunities happen silently. Both cost the student. One costs the school its reputation.</p>
+      </div>
+      <div class="outcome-card with">
+        <div class="outcome-label">
+          <div class="outcome-icon"><i class="fas fa-check"></i></div>
+          <h4>With ArkaX</h4>
+        </div>
+        <p>Your school has a system it can name, show, and stand behind. Every student has a path. Every parent has visibility. Counselors spend their time on real guidance, not intake. And your school becomes known for something most schools still can't offer — career direction that starts early and follows every student all the way through.</p>
+      </div>
+    </div>
+    <div class="compare-wrap fade-in">
+      <table class="compare-table">
+        <thead><tr><th>Without ArkaX</th><th>With ArkaX</th></tr></thead>
+        <tbody>
+          <tr><td class="neg">No system to show parents</td><td class="pos">A named, visible guidance program</td></tr>
+          <tr><td class="neg">Guidance stays spotty</td><td class="pos">Structured journey from Grade 9</td></tr>
+          <tr><td class="neg">No progress tracking</td><td class="pos">Milestones tracked year by year</td></tr>
+          <tr><td class="neg">Parents have no visibility</td><td class="pos">Parents aligned and informed throughout</td></tr>
+          <tr><td class="neg">Wrong choices surface late</td><td class="pos">Early alignment prevents drift</td></tr>
+          <tr><td class="neg">Missed opportunities go unnoticed</td><td class="pos">Strengths mapped and built upon early</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FUTURE READY -->
+<section class="future-section">
+  <div class="future-inner">
+    <div class="future-badge fade-in">🎓</div>
+    <div class="fade-in">
+      <div class="future-eyebrow">Future-Ready · NEP 2020 Aligned</div>
+      <div class="future-title">Preparing Students for Life — Not Just Exams</div>
+      <p class="future-desc">ArkaX prepares students for careers, not just exams — giving schools a practical system for holistic student development that goes beyond marks. Aligned with India's vision for future-ready education under NEP 2020.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="get-started">
+  <div class="cta-inner fade-in">
+    <div class="section-eyebrow">Get Started</div>
+    <h2 class="section-title">Be the Future Ready School With a Real Answer.<br>And the Results to Back It Up.</h2>
+    <div class="section-divider" style="margin:0 auto 1.5rem;"></div>
+    <p class="cta-sub">One system. Every grade. No added workload.</p>
+    <a href="mailto:contact@arkax.ai" class="btn-primary" style="display:inline-flex;">
+      Bring ArkaX to Your School <i class="fas fa-arrow-right fa-xs"></i>
+    </a>
+    <div class="cta-pills">
+      <div class="cta-pill"><i class="fas fa-check"></i> Under 1 hour to onboard</div>
+      <div class="cta-pill"><i class="fas fa-check"></i> No IT setup required</div>
+      <div class="cta-pill"><i class="fas fa-check"></i> Start with one cohort</div>
+      <div class="cta-pill"><i class="fas fa-check"></i> Future-ready · NEP 2020 aligned</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="container">
+  <div class="footer-inner">
+    <div class="footer-logo">Arka<span>X</span></div>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="schools.html">For Schools</a>
       <a href="counselors.html">For Counselors</a>
-      <a href="/cdn-cgi/l/email-protection#9af9f5f4eefbf9eedafbe8f1fbe2b4fbf3"><span class="__cf_email__" data-cfemail="64070b0a100507102405160f051c4a050d">[email&#160;protected]</span></a>
-    </div>    <div style="margin-top:.5rem;color:rgba(255,255,255,0.4)">© 2025 ArkaX. All rights reserved.</div>
+      <a href="mailto:contact@arkax.ai">contact@arkax.ai</a>
+    </div>
+    <div class="footer-copy">© 2025 ArkaX. All rights reserved.</div>
   </div>
 </footer>
+
 <script>
   window.addEventListener('scroll', () => {
-    document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 10);
+    document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 10);
   });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
