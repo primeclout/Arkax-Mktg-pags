@@ -545,9 +545,11 @@
 
         /* ═══ FOOTER ═══ */
         footer {
-            background: var(--slate-900); padding: 28px 48px;
+            background: #1e293b; padding: 32px 48px;
             display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 20px;
             border-top: 1px solid rgba(255,255,255,0.06);
+            color: white;
         }
 
         .footer-links { display: flex; gap: 28px; }
@@ -626,6 +628,7 @@
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 900px) {
             nav { padding: 0 16px; }
+            footer { padding: 24px 16px; }
             .nav-link { display: none; }
 
             .hero { padding: 100px 20px 60px; }
@@ -993,42 +996,38 @@
     </section>
 
     
-<footer style="background:#1e293b;color:white;padding:40px 20px;text-align:center;margin-top:60px;">
-  <div style="margin-bottom:18px;">
-    <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:40px;width:auto;">
-  </div>
+<footer>
 
-  <div style="display:flex;justify-content:center;gap:24px;margin-bottom:18px;flex-wrap:wrap;">
+    <div>
+      <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:34px;width:auto;">
+    </div>
 
-    <a href="https://www.linkedin.com/company/arkax-ai" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" style="width:22px;filter:invert(1);">
-    </a>
+    <div style="display:flex;gap:18px;align-items:center;">
+      <a href="https://www.linkedin.com/company/arkax-ai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" style="width:20px;filter:invert(1);">
+      </a>
+      <a href="https://www.instagram.com/arkax.ai/" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="width:20px;filter:invert(1);">
+      </a>
+      <a href="https://www.facebook.com/arkaxai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" style="width:20px;filter:invert(1);">
+      </a>
+      <a href="https://x.com/arkaxai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="width:20px;filter:invert(1);">
+      </a>
+      <a href="https://www.youtube.com/@ArkaXai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="width:20px;filter:invert(1);">
+      </a>
+    </div>
 
-    <a href="https://www.instagram.com/arkax.ai/" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="width:22px;filter:invert(1);">
-    </a>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <a href="schools.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Schools</a>
+    </div>
 
-    <a href="https://www.facebook.com/arkaxai" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" style="width:22px;filter:invert(1);">
-    </a>
+    <div style="color:rgba(255,255,255,0.5);font-size:0.8rem;">
+      © 2026 ArkaX
+    </div>
 
-    <a href="https://x.com/arkaxai" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="width:22px;filter:invert(1);">
-    </a>
-
-    <a href="https://www.youtube.com/@ArkaXai" target="_blank">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="width:22px;filter:invert(1);">
-    </a>
-
-  </div>
-
-  <div style="margin-bottom:12px;">
-    <a href="schools.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Schools</a>
-  </div>
-
-  <div style="opacity:.7;font-size:14px;">
-    © 2026 ArkaX
-  </div>
 </footer>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
