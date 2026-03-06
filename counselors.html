@@ -55,6 +55,7 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 1px 12px rgba(124,58,237,0.06);
+            overflow: visible;
         }
 
         .nav-logo { text-decoration: none; display: flex; align-items: center; }
@@ -556,6 +557,61 @@
 
         .footer-copy { font-size: 12px; color: var(--slate-600); }
 
+        /* ═══ LOGIN DROPDOWN ═══ */
+        .login-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .login-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--slate-500);
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .login-btn:hover { color: var(--purple); }
+        .login-menu {
+            position: absolute;
+            top: 105%;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            width: fit-content;
+            white-space: nowrap;
+            padding: 2px 0;
+            display: none;
+            z-index: 9999;
+        }
+        .login-menu a {
+            display: block;
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            color: #334155;
+            text-decoration: none;
+            text-align: left !important;
+        }
+        .login-menu a:hover { background: #F3F4F6; }
+        .login-menu.show-menu { display: block; }
+        .login-menu::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 16px;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-left: 1px solid #E5E7EB;
+            border-top: 1px solid #E5E7EB;
+            transform: rotate(45deg);
+        }
+
         /* ═══ ANIMATIONS ═══ */
         @keyframes fade-up {
             from { opacity: 0; transform: translateY(24px); }
@@ -625,6 +681,13 @@
             <a href="#how" class="nav-link">How it Works</a>
             <a href="#outcomes" class="nav-link">Outcomes</a>
             <a href="#demo" class="nav-cta">Book a Demo →</a>
+            <div class="login-dropdown">
+                <button class="login-btn">Login ▾</button>
+                <div class="login-menu">
+                    <a href="student-login.html">Student</a>
+                    <a href="counselor-login.html">Counselor</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -960,9 +1023,31 @@
 
   </div>
 
+  <div style="margin-bottom:12px;">
+    <a href="schools.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;" onmouseover="this.style.color='#c4b5fd'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Schools</a>
+  </div>
+
   <div style="opacity:.7;font-size:14px;">
     © 2026 ArkaX
   </div>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    const btn = document.querySelector(".login-btn");
+    const menu = document.querySelector(".login-menu");
+    if(!btn || !menu) return;
+    btn.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        menu.classList.toggle("show-menu");
+    });
+    document.addEventListener("click", function(){
+        menu.classList.remove("show-menu");
+    });
+    menu.addEventListener("click", function(e){
+        e.stopPropagation();
+    });
+});
+</script>
 </body>
 </html>

@@ -774,6 +774,26 @@
   transform:translateY(-1px);
 }
 
+
+/* FIX: prevent scroll-top arrow overlapping footer links */
+.scroll-top, .back-to-top, #backToTop {
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 10;
+}
+
+footer{
+  position: relative;
+  z-index: 20;
+}
+
+/* On mobile move arrow slightly up */
+@media (max-width:900px){
+  .scroll-top, .back-to-top, #backToTop{
+    bottom: 80px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1263,6 +1283,12 @@
     © 2026 ArkaX
   </div>
 
+
+    <div class="footer-extra-links" style="display:flex;gap:20px;justify-content:center;margin-top:10px;">
+      <a href="schools.html" style="color:rgba(255,255,255,0.7);text-decoration:none;">Schools</a>
+      <a href="counselors.html" style="color:rgba(255,255,255,0.7);text-decoration:none;">Counselors</a>
+    </div>
+    
 </footer>
 
 

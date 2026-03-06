@@ -39,11 +39,13 @@
       background: #334155;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       transition: box-shadow 0.3s;
+      overflow: visible;
     }
     .site-header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
     .header-inner {
       max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between; height: 100%;
+      overflow: visible;
     }
     .nav-right { display: flex; align-items: center; gap: 6px; }
     .nav-link { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.7); padding: 0.4rem 0.9rem; border-radius: 7px; transition: all 0.2s; }
@@ -374,6 +376,72 @@
 
 }
 
+
+
+
+
+
+/* LOGIN DROPDOWN */
+.login-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-menu {
+  position: absolute;
+  top: 105%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  width: fit-content;
+  white-space: nowrap;
+  padding: 2px 0;
+  display: none;
+  z-index: 9999;
+}
+
+.login-menu a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #334155;
+  text-decoration: none;
+  text-align: left !important;
+}
+
+.login-menu a:hover {
+  background: #F3F4F6;
+}
+
+.login-menu.show-menu {
+  display: block;
+}
+
+.login-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-left: 1px solid #E5E7EB;
+  border-top: 1px solid #E5E7EB;
+  transform: rotate(45deg);
+}
+
+
 </style>
 </head>
 <body>
@@ -382,10 +450,22 @@
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:38px;width:auto;">
-    <nav class="nav-right">
-      <a href="#how-it-works" class="nav-link">How It Works</a>
-      <a href="#get-started" class="nav-cta">Book a Demo →</a>
-    </nav>
+    
+
+<nav class="nav-right">
+  <a href="#how-it-works" class="nav-link">How It Works</a>
+  <a href="#get-started" class="nav-cta">Book a Demo →</a>
+
+  <div class="login-dropdown">
+    <button class="nav-link login-btn">Login ▾</button>
+    <div class="login-menu">
+      <a href="student-login.html">Student</a>
+      <a href="school-login.html">School</a>
+    </div>
+  </div>
+</nav>
+
+
   </div>
 </header>
 
@@ -725,7 +805,7 @@
     <div class="cta-badge">🌟 Get Started</div>
     <h2 class="sec-title">Be the School With a Real Answer.<br><em>And the Results to Back It Up.</em></h2>
     <p class="cta-sub">One system. Every grade. No added workload.</p>
-    <a href="mailto:contact@arkax.ai" class="btn-primary" style="display:inline-flex;font-size:1rem;padding:1rem 2rem;">
+    <a href="/cdn-cgi/l/email-protection#89eae6e7fde8eafdc9e8fbe2e8f1a7e8e0" class="btn-primary" style="display:inline-flex;font-size:1rem;padding:1rem 2rem;">
       Bring ArkaX to Your School →
     </a>
     <div class="cta-pills">
@@ -766,6 +846,10 @@
       </a>
     </div>
 
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+      <a href="counselors.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#99f6e4'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Counselors</a>
+    </div>
+
     <div style="color:rgba(255,255,255,0.5);font-size:0.8rem">
       © 2026 ArkaX
     </div>
@@ -775,7 +859,7 @@
 
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   window.addEventListener('scroll', () => {
     document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 10);
   });
@@ -785,6 +869,31 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const btn = document.querySelector(".login-btn");
+  const menu = document.querySelector(".login-menu");
+
+  if(!btn || !menu) return;
+
+  btn.addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    menu.classList.toggle("show-menu");
+  });
+
+  document.addEventListener("click", function(){
+    menu.classList.remove("show-menu");
+  });
+
+  menu.addEventListener("click", function(e){
+    e.stopPropagation();
+  });
+
+});
 </script>
 </body>
 </html>
