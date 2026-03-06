@@ -570,20 +570,47 @@
 
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 900px) {
-            nav { padding: 0 24px; }
-            .hero, .section, .final-cta { padding-left: 24px; padding-right: 24px; }
-            .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-            .hero-card { display: none; }
+            nav { padding: 0 16px; }
+            .nav-link { display: none; }
+
+            .hero { padding: 100px 20px 60px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+            .hero-headline { font-size: clamp(28px, 7vw, 44px); }
+            .hero-subhead { font-size: 15px; }
+            .hero-card { display: block; }
+
+            .section { padding: 64px 20px; }
+            .final-cta { padding: 64px 20px; }
+
             .problem-grid { grid-template-columns: 1fr; gap: 40px; }
-            .missing-pillars { grid-template-columns: 1fr 1fr; }
+            .missing-pillars { grid-template-columns: 1fr 1fr; gap: 12px; }
             .support-grid { grid-template-columns: 1fr; }
-            .model-steps { grid-template-columns: 1fr; }
+            .model-steps { grid-template-columns: 1fr; gap: 0; }
             .model-arrow { display: none; }
+            .model-step { padding: 24px 0; }
+
             .comparison-header, .comparison-row { grid-template-columns: 1fr 1fr; }
             .cr-aspect { display: none; }
+            .ch-blank { display: none; }
             .outcome-narrative { grid-template-columns: 1fr; }
-            footer { flex-direction: column; gap: 16px; text-align: center; }
-            .footer-links { flex-wrap: wrap; justify-content: center; }
+
+            .support-divider { flex-direction: column; gap: 16px; padding: 24px 20px; text-align: center; }
+            .support-divider-text { font-size: 16px; }
+
+            .final-cta-buttons { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+
+            footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
+            .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+        }
+
+        @media (max-width: 600px) {
+            .missing-pillars { grid-template-columns: 1fr; }
+            .section-title { font-size: clamp(26px, 7vw, 36px); }
+            .ch-col, .cr-bad, .cr-good { padding: 14px 16px; font-size: 12px; }
+            .ch-blank { padding: 14px 16px; }
+            .problem-burden-item { flex-wrap: wrap; }
+            .pb-tag { margin-left: 0; }
         }
     </style>
 </head>
@@ -897,28 +924,45 @@
                 Deliver career guidance that's finally measurable — without adding to your workload.
             </p>
             <div class="final-cta-buttons">
-                <a href="mailto:contact@arkax.ai" class="btn-primary" style="font-size:16px; padding: 18px 40px;">
-                    Book a Demo
-                    <span class="arrow">→</span>
-                </a>
-                <a href="mailto:contact@arkax.ai" class="btn-secondary">
-                    Ask a question
-                </a>
+                
+                <a href="#demo" class="btn-primary">Book a Demo <span class="arrow">→</span></a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="schools.html">For Schools</a>
-            <a href="counselors.html">For Counselors</a>
-            <a href="mailto:contact@arkax.ai">📧 contact@arkax.ai</a>
-            <a href="#">🌐 www.arkax.ai</a>
-        </div>
-        <span class="footer-copy">© 2025 ArkaX. All rights reserved.</span>
-    </footer>
+    
+<footer style="background:#1e293b;color:white;padding:40px 20px;text-align:center;margin-top:60px;">
+  <div style="margin-bottom:18px;">
+    <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:40px;width:auto;">
+  </div>
 
+  <div style="display:flex;justify-content:center;gap:24px;margin-bottom:18px;flex-wrap:wrap;">
+
+    <a href="https://www.linkedin.com/company/arkax-ai" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" style="width:22px;filter:invert(1);">
+    </a>
+
+    <a href="https://www.instagram.com/arkax.ai/" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="width:22px;filter:invert(1);">
+    </a>
+
+    <a href="https://www.facebook.com/arkaxai" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" style="width:22px;filter:invert(1);">
+    </a>
+
+    <a href="https://x.com/arkaxai" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="width:22px;filter:invert(1);">
+    </a>
+
+    <a href="https://www.youtube.com/@ArkaXai" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="width:22px;filter:invert(1);">
+    </a>
+
+  </div>
+
+  <div style="opacity:.7;font-size:14px;">
+    © 2026 ArkaX
+  </div>
+</footer>
 </body>
 </html>

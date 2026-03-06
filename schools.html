@@ -282,7 +282,7 @@
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 900px) {
       .hero-wrap { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      
       .hero-left { padding: 60px 0; }
       .problem-layout { grid-template-columns: 1fr; gap: 40px; }
       .how-grid { grid-template-columns: 1fr; }
@@ -299,7 +299,82 @@
       .hero h1 { font-size: 1.9rem; }
       .section { padding: 60px 1.25rem; }
     }
-  </style>
+  
+/* MOBILE HERO TRUE CENTER FIX */
+@media (max-width:900px){
+
+.hero-wrap{
+  grid-template-columns:1fr !important;
+  padding:0 16px !important;
+  margin:0 auto !important;
+  width:100% !important;
+}
+
+.hero-left{
+  text-align:center !important;
+}
+
+.hero-right{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:18px !important;
+  border-left:none !important;
+  align-items:center !important;
+  margin:0 auto !important;
+}
+
+.hero-stat-card{
+  width:90% !important;
+  max-width:420px !important;
+  margin:0 auto !important;
+}
+
+}
+
+
+/* STRONG MOBILE CENTER FIX FOR WHY THIS MATTERS */
+@media (max-width:900px){
+
+.hero-wrap{
+  grid-template-columns:1fr !important;
+  padding:0 16px !important;
+  margin:0 auto !important;
+  width:100% !important;
+}
+
+.hero-left{
+  text-align:center !important;
+  padding:60px 0 30px 0 !important;
+}
+
+.hero-right{
+  width:100% !important;
+  padding:30px 0 0 0 !important;
+  margin:0 auto !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  border-left:none !important;
+}
+
+.hero-right-label{
+  width:100%;
+  text-align:center !important;
+  margin-bottom:10px;
+}
+
+.hero-stat-card{
+  width:92% !important;
+  max-width:420px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+}
+
+</style>
 </head>
 <body>
 
@@ -664,17 +739,41 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="schools.html">For Schools</a>
-      <a href="counselors.html">For Counselors</a>
-      <a href="mailto:contact@arkax.ai">contact@arkax.ai</a>
+
+
+<footer style="background:#1e293b;padding:32px 20px;">
+  <div style="max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+
+    <div>
+      <img src="ArkaX_Logo-transparent.png" alt="ArkaX Logo" style="height:34px;width:auto;">
     </div>
-    <span class="footer-copy">© 2025 ArkaX. All rights reserved.</span>
+
+    <div style="display:flex;gap:18px;align-items:center">
+      <a href="https://www.linkedin.com/company/arkax-ai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" style="width:20px;filter:invert(1)">
+      </a>
+      <a href="https://www.instagram.com/arkax.ai/" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" style="width:20px;filter:invert(1)">
+      </a>
+      <a href="https://www.facebook.com/arkaxai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" style="width:20px;filter:invert(1)">
+      </a>
+      <a href="https://x.com/arkaxai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" style="width:20px;filter:invert(1)">
+      </a>
+      <a href="https://www.youtube.com/@ArkaXai" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" style="width:20px;filter:invert(1)">
+      </a>
+    </div>
+
+    <div style="color:rgba(255,255,255,0.5);font-size:0.8rem">
+      © 2026 ArkaX
+    </div>
+
   </div>
 </footer>
+
+
 
 <script>
   window.addEventListener('scroll', () => {
