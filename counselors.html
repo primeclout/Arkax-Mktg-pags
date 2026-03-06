@@ -46,15 +46,14 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--slate-200);
+            background: #334155;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 0 48px;
             height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 1px 12px rgba(124,58,237,0.06);
+            box-shadow: 0 1px 12px rgba(0,0,0,0.15);
             overflow: visible;
         }
 
@@ -64,11 +63,11 @@
 
         .nav-link {
             font-size: 13px; font-weight: 600;
-            color: var(--slate-500);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             transition: color 0.2s;
         }
-        .nav-link:hover { color: var(--purple); }
+        .nav-link:hover { color: #fff; }
 
         .nav-cta {
             background: var(--purple);
@@ -570,11 +569,11 @@
             font-family: inherit;
             font-size: 13px;
             font-weight: 600;
-            color: var(--slate-500);
+            color: rgba(255,255,255,0.7);
             padding: 0;
             transition: color 0.2s;
         }
-        .login-btn:hover { color: var(--purple); }
+        .login-btn:hover { color: #fff; }
         .login-menu {
             position: absolute;
             top: 105%;
@@ -675,7 +674,7 @@
     <!-- NAV -->
     <nav>
         <a href="#" class="nav-logo">
-            <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:40px;width:auto;">
+            <img src="ArkaX_Logo-transparent.png" alt="ArkaX" style="height:36px;width:auto;">
         </a>
         <div class="nav-right">
             <a href="#how" class="nav-link">How it Works</a>
